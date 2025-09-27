@@ -21,7 +21,7 @@ struct WelcomeView: View {
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
-                //
+                // here
             }) {
                 Text("hola").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
