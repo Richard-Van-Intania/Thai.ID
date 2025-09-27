@@ -10,20 +10,20 @@ struct WelcomeView: View {
                 .scaledToFit().frame(height: 400)
             Spacer()
             HStack {
-                Text("ยินดีต้อนรับสู่")
+                Text("test")
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_black)
-                Text("Thai.ID")
+                Text("test")
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_darkblue)
 
             }
             Spacer().frame(height: 16)
-            Text("ให้บริการพิสูจน์และยืนยันตัวตนเพื่อสังคมไทยไร้กระดาษให้บริการพิสูจน์และยืนยันตัวตนเพื่อสังคมไทยไร้กระดาษ")
+            Text("test")
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
                 // here
             }) {
-                Text("hola").font(.custom("FCIconicBold", size: 24))
+                Text("test").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
                     .frame(maxWidth: 320, maxHeight: 56)
                     .background(primary_gradient)
