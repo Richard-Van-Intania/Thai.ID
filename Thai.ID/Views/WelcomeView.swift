@@ -33,3 +33,7 @@ struct WelcomeView: View {
         }.padding()
     }
 }
+
+#Preview {
+    WelcomeView().environment(\.locale, Locale(identifier: "th"))
+}
