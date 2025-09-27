@@ -1,0 +1,5 @@
+Family: FC Iconic
+   FCIconicRegular
+   FCIconicItalic
+   FCIconicBold
+   FCIconicBoldItalic

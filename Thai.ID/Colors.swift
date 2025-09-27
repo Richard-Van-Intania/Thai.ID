@@ -1,0 +1,42 @@
+import SwiftUI
+
+extension Color {
+    init(hex: String) {
+        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
+        var int: UInt64 = 0
+        Scanner(string: hex).scanHexInt64(&int)
+        let r: UInt64
+        let g: UInt64
+        let b: UInt64
+        switch hex.count {
+        case 6:  // RGB (24-bit)
+            (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
+        default:
+            (r, g, b) = (1, 1, 0)
+        }
+        self.init(
+            .sRGB,
+            red: Double(r) / 255,
+            green: Double(g) / 255,
+            blue: Double(b) / 255,
+            opacity: 1
+        )
+    }
+}
+
+let white = Color(.white)
+let black = Color(.black)
+
+let primary_black = Color(hex: "#23272E")
+let primary_darkblue = Color(hex: "#094483")
+
+let neutral07 = Color(hex: "#546075")
+
+let left_gradient = Color(hex: "#094483")
+let right_gradient = Color(hex: "#0664C3")
+
+let primary_gradient = LinearGradient(
+    gradient: Gradient(colors: [left_gradient, right_gradient]),
+    startPoint: .topLeading,
+    endPoint: .bottomTrailing
+)

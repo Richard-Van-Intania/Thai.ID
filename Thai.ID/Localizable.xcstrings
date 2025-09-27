@@ -1,0 +1,35 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Hello, World!" : {
+
+    },
+    "hola" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "hello"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สวะสดี"
+          }
+        }
+      }
+    },
+    "Thai.ID" : {
+
+    },
+    "ยินดีต้อนรับสู่" : {
+
+    },
+    "ให้บริการพิสูจน์และยืนยันตัวตนเพื่อสังคมไทยไร้กระดาษให้บริการพิสูจน์และยืนยันตัวตนเพื่อสังคมไทยไร้กระดาษ" : {
+
+    }
+  },
+  "version" : "1.1"
+}
