@@ -273,36 +273,19 @@
         }
       }
     },
-    "app_directory" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "thaidotidbyfinema"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "thaidotidbyfinema"
-          }
-        }
-      }
-    },
     "app_name" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Thai.ID by Finema"
+            "value" : "Thai.ID"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ไทยดอทไอดีบายฟินีม่า"
+            "value" : "ไทยดอทไอดี"
           }
         }
       }
@@ -1374,6 +1357,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "สวัสดี!"
+          }
+        }
+      }
+    },
+    "Hello, World!" : {
+      "localizations" : {
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "สวัสดีโลก!"
           }
         }
       }
@@ -2801,7 +2794,7 @@
         "th" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "ไทยดอทไอดี"
+            "value" : "Thai.ID"
           }
         }
       }

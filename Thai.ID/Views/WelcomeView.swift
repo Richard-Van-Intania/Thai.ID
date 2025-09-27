@@ -10,20 +10,20 @@ struct WelcomeView: View {
                 .scaledToFit().frame(height: 400)
             Spacer()
             HStack {
-                Text("test")
+                Text("welcome_to")
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_black)
-                Text("test")
+                Text("thai_dot_id")
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_darkblue)
 
             }
             Spacer().frame(height: 16)
-            Text("test")
+            Text("a_credible_solution").frame(maxWidth: .infinity).multilineTextAlignment(.center)
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
                 // here
             }) {
-                Text("test").font(.custom("FCIconicBold", size: 24))
+                Text("get_started").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
                     .frame(maxWidth: 320, maxHeight: 56)
                     .background(primary_gradient)
@@ -32,8 +32,4 @@ struct WelcomeView: View {
 
         }.padding()
     }
-}
-
-#Preview {
-    WelcomeView()
 }
