@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8D9C12972E87D5CC00AF31B8 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C12962E87D5C000AF31B8 /* notes.txt */; };
 		8D9C12992E87D70600AF31B8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C12982E87D70600AF31B8 /* README.md */; };
+		8D9C12DF2E899DB900AF31B8 /* TextBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8D9C12DE2E899DB900AF31B8 /* TextBuilder */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D9C12DF2E899DB900AF31B8 /* TextBuilder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +44,7 @@
 				8D9C12982E87D70600AF31B8 /* README.md */,
 				8D9C12962E87D5C000AF31B8 /* notes.txt */,
 				8D9C127F2E87D35400AF31B8 /* Thai.ID */,
+				8D9C12E02E89A0B600AF31B8 /* Frameworks */,
 				8D9C127E2E87D35400AF31B8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -52,6 +55,13 @@
 				8D9C127D2E87D35400AF31B8 /* Thai.ID.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		8D9C12E02E89A0B600AF31B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +84,7 @@
 			);
 			name = Thai.ID;
 			packageProductDependencies = (
+				8D9C12DE2E899DB900AF31B8 /* TextBuilder */,
 			);
 			productName = Thai.ID;
 			productReference = 8D9C127D2E87D35400AF31B8 /* Thai.ID.app */;
@@ -104,6 +115,9 @@
 			);
 			mainGroup = 8D9C12742E87D35400AF31B8;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				8D9C12DD2E899DB900AF31B8 /* XCRemoteSwiftPackageReference "TextBuilder" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8D9C127E2E87D35400AF31B8 /* Products */;
 			projectDirPath = "";
@@ -360,6 +374,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8D9C12DD2E899DB900AF31B8 /* XCRemoteSwiftPackageReference "TextBuilder" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/davdroman/TextBuilder";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8D9C12DE2E899DB900AF31B8 /* TextBuilder */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8D9C12DD2E899DB900AF31B8 /* XCRemoteSwiftPackageReference "TextBuilder" */;
+			productName = TextBuilder;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8D9C12752E87D35400AF31B8 /* Project object */;
 }

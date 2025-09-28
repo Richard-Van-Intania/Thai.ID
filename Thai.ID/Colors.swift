@@ -40,6 +40,7 @@ let primary_gradient = LinearGradient(
 let primary_black = Color(hex: "#23272E")
 let primary_darkblue = Color(hex: "#094483")
 
+let neutral06 = Color(hex: "#69778E")
 let neutral07 = Color(hex: "#546075")
 
 let secondary_bluegray = Color(hex: "#B2BAC7")
@@ -47,4 +48,4 @@ let secondary_bluegray = Color(hex: "#B2BAC7")
 let primary_red = Color(hex: "#B3001B")
 let secondary_gray = Color(hex: "#D6DAE1")
 
-// secondary_bluegray #B2BAC7  #B3001B primary_red secondary_gray #D6DAE1
+// secondary_bluegray #B2BAC7  #B3001B primary_red secondary_gray #D6DAE1 #69778E

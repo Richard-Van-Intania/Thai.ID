@@ -1,12 +1,13 @@
+import Builders
 import SwiftUI
+import TextBuilder
 
 struct TermsView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading) {
-                    Text(paragraph1)
-                    //
+                    termsAndConditions()
                 }.frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
 
             }.toolbar {
@@ -22,14 +23,35 @@ struct TermsView: View {
 }
 
 #Preview {
-    TermsView().environment(\.locale, Locale(identifier: "th"))
+    TermsView().environment(\.locale, Locale(identifier: "en"))
 
+}
+
+@TextBuilder
+func termsAndConditions() -> Text {
+    Text(paragraph1)
+        .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
+    Text(company)
+        .font(.custom("FCIconicBold", size: 18)).foregroundColor(neutral06)
+    Text(paragraph2Ios)
+        .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
+    Text(thaidotid)
+        .font(.custom("FCIconicBold", size: 18)).foregroundColor(neutral06)
+    Text(paragraph3)
+        .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
+    Text(terms)
+        .font(.custom("FCIconicBold", size: 18)).foregroundColor(neutral06)
+    Text(paragraph4)
+        .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
+    Text(service)
+        .font(.custom("FCIconicBold", size: 18)).foregroundColor(neutral06)
+    Text(paragraph5)
+        .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
 }
 
 let paragraph1 = "บริษัท ฟินีม่า จำกัด (ซึ่งต่อไปในประกาศนี้ เรียกว่า "
 let company = "“บริษัท”"
 let paragraph2Ios = ") ได้พัฒนาแอปพลิเคชัน Thai.ID (ซึ่งต่อไปนี้ในประกาศนี้ เรียกว่า "
-let paragraph2Android = ") ได้พัฒนาแอปพลิเคชัน Thai.ID by Finema (ซึ่งต่อไปนี้ในประกาศนี้ เรียกว่า "
 let thaidotid = "“Thai.ID”"
 
 let paragraph3 =
