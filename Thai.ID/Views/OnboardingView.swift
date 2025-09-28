@@ -49,6 +49,4 @@ struct OnboardingView: View {
     }
 }
 
-#Preview {
-    OnboardingView().environment(\.locale, Locale(identifier: "th"))
-}
+
