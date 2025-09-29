@@ -25,7 +25,7 @@ struct WelcomeView: View {
             }) {
                 Text("get_started").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
-                    .frame(maxWidth: 320, maxHeight: 56)
+                    .frame(maxWidth: 320, minHeight: 56)
                     .background(primary_gradient)
                     .clipShape(Capsule())
             }
