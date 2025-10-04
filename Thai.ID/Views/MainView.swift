@@ -34,6 +34,8 @@ struct MainView: View {
                             ProfileDetailsView(path: $profilePath)
                         case .profileEditView:
                             ProfileEditView(path: $profilePath)
+                        case .termsView:
+                            TermsView(path: $profilePath)
                         }
                     }
                 }

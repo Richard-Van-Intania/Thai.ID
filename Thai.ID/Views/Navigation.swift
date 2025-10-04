@@ -19,5 +19,6 @@ enum HistoryRoute: Hashable {
 enum ProfileRoute: Hashable {
     case profileDetailsView
     case profileEditView
+    case termsView
 
 }

@@ -11,30 +11,32 @@ struct TermsView: View {
             VStack(alignment: .leading) {
                 termsAndConditions()
                 Spacer().frame(height: 32)
-                HStack {
-                    Button(action: {
-                        path = NavigationPath()
-                    }) {
-                        Text("decline").font(.custom("FCIconicBold", size: 24))
-                            .foregroundColor(right_gradient)
-                            .frame(maxWidth: .infinity, minHeight: 56)
-                            .background(white)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 56)
-                                    .stroke(right_gradient, lineWidth: 2)
-                            )
-                    }.buttonStyle(.plain)
-                    Spacer().frame(width: 16)
-                    Button(action: {
-                        isAcceptedAgreements = true
-                        path = NavigationPath()
-                    }) {
-                        Text("accept").font(.custom("FCIconicBold", size: 24))
-                            .foregroundColor(white)
-                            .frame(maxWidth: .infinity, minHeight: 56)
-                            .background(primary_gradient)
-                            .clipShape(Capsule())
-                    }.buttonStyle(.plain)
+                if !isAcceptedAgreements {
+                    HStack {
+                        Button(action: {
+                            path = NavigationPath()
+                        }) {
+                            Text("decline").font(.custom("FCIconicBold", size: 24))
+                                .foregroundColor(right_gradient)
+                                .frame(maxWidth: .infinity, minHeight: 56)
+                                .background(white)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 56)
+                                        .stroke(right_gradient, lineWidth: 2)
+                                )
+                        }.buttonStyle(.plain)
+                        Spacer().frame(width: 16)
+                        Button(action: {
+                            isAcceptedAgreements = true
+                            path = NavigationPath()
+                        }) {
+                            Text("accept").font(.custom("FCIconicBold", size: 24))
+                                .foregroundColor(white)
+                                .frame(maxWidth: .infinity, minHeight: 56)
+                                .background(primary_gradient)
+                                .clipShape(Capsule())
+                        }.buttonStyle(.plain)
+                    }
                 }
             }.frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
         }.toolbar {
