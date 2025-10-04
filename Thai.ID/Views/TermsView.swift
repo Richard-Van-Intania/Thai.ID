@@ -3,53 +3,47 @@ import SwiftUI
 import TextBuilder
 
 struct TermsView: View {
+    @Binding var path: NavigationPath
+    @Binding var isAcceptAgreement: Bool
+
     var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading) {
-                    termsAndConditions()
-                    Spacer().frame(height: 32)
-                    HStack {
-                        Button(action: {
-                            // here
-                        }) {
-                            Text("decline").font(.custom("FCIconicBold", size: 24))
-                                .foregroundColor(right_gradient)
-                                .frame(maxWidth: .infinity, minHeight: 56)
-                                .background(white)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 56)
-                                        .stroke(right_gradient, lineWidth: 2)
-                                )
-                        }
-                        Spacer().frame(width: 16)
-                        Button(action: {
-                            // here
-                        }) {
-                            Text("accept").font(.custom("FCIconicBold", size: 24))
-                                .foregroundColor(white)
-                                .frame(maxWidth: .infinity, minHeight: 56)
-                                .background(primary_gradient)
-                                .clipShape(Capsule())
-                        }
-                    }
-                }.frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
-
-            }.toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("terms")
-                        .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
+        ScrollView {
+            VStack(alignment: .leading) {
+                termsAndConditions()
+                Spacer().frame(height: 32)
+                HStack {
+                    Button(action: {
+                        path = NavigationPath()
+                    }) {
+                        Text("decline").font(.custom("FCIconicBold", size: 24))
+                            .foregroundColor(right_gradient)
+                            .frame(maxWidth: .infinity, minHeight: 56)
+                            .background(white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 56)
+                                    .stroke(right_gradient, lineWidth: 2)
+                            )
+                    }.buttonStyle(.plain)
+                    Spacer().frame(width: 16)
+                    Button(action: {
+                        isAcceptAgreement = true
+                        path = NavigationPath()
+                    }) {
+                        Text("accept").font(.custom("FCIconicBold", size: 24))
+                            .foregroundColor(white)
+                            .frame(maxWidth: .infinity, minHeight: 56)
+                            .background(primary_gradient)
+                            .clipShape(Capsule())
+                    }.buttonStyle(.plain)
                 }
-            }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar)
-
-        }
-
+            }.frame(maxWidth: .infinity, alignment: .leading).padding(.horizontal)
+        }.toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("terms")
+                    .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
+            }
+        }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar)
     }
-}
-
-#Preview {
-    TermsView().environment(\.locale, Locale(identifier: "en"))
-
 }
 
 @TextBuilder

@@ -7,14 +7,16 @@ let tipsList: [(imageResource: String, head: String, body: String)] = [
 ]
 
 struct OnboardingView: View {
+    @Binding var path: NavigationPath
+
     var body: some View {
         VStack {
             Button(action: {
-                //
+                path.append(OnboardingRoutes.termsView)
             }) {
                 Text("skip").frame(maxWidth: .infinity, alignment: .trailing)
                     .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray)
-            }
+            }.buttonStyle(.plain)
             TabView {
                 ForEach(tipsList.indices, id: \.self) { index in
                     let tip = tipsList[index]
@@ -37,14 +39,14 @@ struct OnboardingView: View {
             }
             Spacer()
             Button(action: {
-                // here
+                path.append(OnboardingRoutes.termsView)
             }) {
                 Text("log_in").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
                     .frame(maxWidth: 320, minHeight: 56)
                     .background(primary_gradient)
                     .clipShape(Capsule())
-            }
+            }.buttonStyle(.plain)
         }.padding()
     }
 }

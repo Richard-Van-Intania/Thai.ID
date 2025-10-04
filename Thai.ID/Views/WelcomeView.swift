@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct WelcomeView: View {
+    @Binding var path: NavigationPath
+
     var body: some View {
         VStack {
             Image("thai_id_logo").resizable()
@@ -21,14 +23,14 @@ struct WelcomeView: View {
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
-                // here
+                path.append(OnboardingRoutes.onboardingView)
             }) {
                 Text("get_started").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
                     .frame(maxWidth: 320, minHeight: 56)
                     .background(primary_gradient)
                     .clipShape(Capsule())
-            }
+            }.buttonStyle(.plain)
 
         }.padding()
     }

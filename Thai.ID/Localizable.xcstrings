@@ -273,9 +273,6 @@
         }
       }
     },
-    "amet, consectetur" : {
-
-    },
     "app_name" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1365,7 +1362,6 @@
       }
     },
     "Hello, World!" : {
-      "extractionState" : "stale",
       "localizations" : {
         "th" : {
           "stringUnit" : {
@@ -1579,9 +1575,6 @@
         }
       }
     },
-    "ipsum dolor" : {
-
-    },
     "language" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1683,9 +1676,6 @@
           }
         }
       }
-    },
-    "Lorem" : {
-
     },
     "make_a_cert" : {
       "extractionState" : "manual",
@@ -2723,9 +2713,6 @@
           }
         }
       }
-    },
-    "sit" : {
-
     },
     "skip" : {
       "extractionState" : "manual",
