@@ -4,7 +4,7 @@ struct ProfileView: View {
     @Binding var path: NavigationPath
     
     var body: some View {
-        Button("go to terms") {
+        Button("debugs") {
             path.append(ProfileRoute.termsView)
         }
     }
