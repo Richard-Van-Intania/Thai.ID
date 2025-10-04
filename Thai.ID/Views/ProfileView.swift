@@ -1,9 +1,11 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Binding var path: NavigationPath
+    
     var body: some View {
-        HStack {
-            Text("my_profile").frame(maxWidth: .infinity,maxHeight: .infinity).background(bg_gray)
+        Button("debugs") {
+            path.append(ProfileRoute.profileDetailsView)
         }
     }
 }

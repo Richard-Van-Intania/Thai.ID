@@ -23,7 +23,7 @@ struct WelcomeView: View {
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
-                path.append(OnboardingRoutes.onboardingView)
+                path.append(OnboardingRoute.onboardingView)
             }) {
                 Text("get_started").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)

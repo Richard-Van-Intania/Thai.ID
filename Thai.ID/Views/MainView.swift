@@ -12,15 +12,29 @@ struct MainView: View {
         ZStack {
             ZStack {
                 NavigationStack(path: $homePath) {
-                    HomeView()
+                    HomeView(path: $homePath).navigationDestination(for: HomeRoute.self) { screen in
+                        switch screen {
+                        case .profileDetailsView:
+                            ProfileDetailsView(path: $homePath)
+                        case .profileEditView:
+                            ProfileEditView(path: $homePath)
+                        }
+                    }
                 }
                 .opacity(selectedTab == 0 ? 1 : 0)
                 NavigationStack(path: $historyPath) {
-                    HistoryView()
+                    HistoryView(path: $historyPath)
                 }
                 .opacity(selectedTab == 1 ? 1 : 0)
                 NavigationStack(path: $profilePath) {
-                    ProfileView()
+                    ProfileView(path: $profilePath).navigationDestination(for: ProfileRoute.self) { screen in
+                        switch screen {
+                        case .profileDetailsView:
+                            ProfileDetailsView(path: $profilePath)
+                        case .profileEditView:
+                            ProfileEditView(path: $profilePath)
+                        }
+                    }
                 }
                 .opacity(selectedTab == 2 ? 1 : 0)
             }.ignoresSafeArea()
@@ -31,9 +45,9 @@ struct MainView: View {
                     TabButton(icon: "clock", selectedIcon: "clock.fill", label: "history", tab: 1, selectedTab: $selectedTab)
                     TabButton(icon: "person.circle", selectedIcon: "person.circle.fill", label: "profile", tab: 2, selectedTab: $selectedTab)
                 }.ignoresSafeArea().background(.white)
-            }
+            }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
             NavigationStack(path: $onboardingPath) {
-                WelcomeView(path: $onboardingPath).navigationDestination(for: OnboardingRoutes.self) { screen in
+                WelcomeView(path: $onboardingPath).navigationDestination(for: OnboardingRoute.self) { screen in
                     switch screen {
                     case .onboardingView:
                         OnboardingView(path: $onboardingPath)

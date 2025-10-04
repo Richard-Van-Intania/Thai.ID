@@ -12,7 +12,7 @@ struct OnboardingView: View {
     var body: some View {
         VStack {
             Button(action: {
-                path.append(OnboardingRoutes.termsView)
+                path.append(OnboardingRoute.termsView)
             }) {
                 Text("skip").frame(maxWidth: .infinity, alignment: .trailing)
                     .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray)
@@ -39,7 +39,7 @@ struct OnboardingView: View {
             }
             Spacer()
             Button(action: {
-                path.append(OnboardingRoutes.termsView)
+                path.append(OnboardingRoute.termsView)
             }) {
                 Text("log_in").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
