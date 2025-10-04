@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct MainView: View {
-    @State private var isAcceptAgreement: Bool = true
+    @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
+
     @State private var selectedTab: Int = 0
     @State private var onboardingPath = NavigationPath()
     @State private var homePath = NavigationPath()
@@ -52,13 +53,10 @@ struct MainView: View {
                     case .onboardingView:
                         OnboardingView(path: $onboardingPath)
                     case .termsView:
-                        TermsView(path: $onboardingPath, isAcceptAgreement: $isAcceptAgreement)
+                        TermsView(path: $onboardingPath)
                     }
                 }
-            }.opacity(isAcceptAgreement ? 0 : 1)
-            NavigationStack {
-                LoadingView()
-            }.opacity(0)
+            }.opacity(isAcceptedAgreements ? 0 : 1)
         }
     }
 }

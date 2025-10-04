@@ -15,7 +15,7 @@ struct OnboardingView: View {
                 path.append(OnboardingRoute.termsView)
             }) {
                 Text("skip").frame(maxWidth: .infinity, alignment: .trailing)
-                    .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray)
+                    .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray).padding(.trailing)
             }.buttonStyle(.plain)
             TabView {
                 ForEach(tipsList.indices, id: \.self) { index in

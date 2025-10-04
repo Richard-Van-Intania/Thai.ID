@@ -4,7 +4,7 @@ import TextBuilder
 
 struct TermsView: View {
     @Binding var path: NavigationPath
-    @Binding var isAcceptAgreement: Bool
+    @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
 
     var body: some View {
         ScrollView {
@@ -26,7 +26,7 @@ struct TermsView: View {
                     }.buttonStyle(.plain)
                     Spacer().frame(width: 16)
                     Button(action: {
-                        isAcceptAgreement = true
+                        isAcceptedAgreements = true
                         path = NavigationPath()
                     }) {
                         Text("accept").font(.custom("FCIconicBold", size: 24))
