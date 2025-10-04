@@ -10,12 +10,14 @@
 		8D9C12972E87D5CC00AF31B8 /* notes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C12962E87D5C000AF31B8 /* notes.txt */; };
 		8D9C12992E87D70600AF31B8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C12982E87D70600AF31B8 /* README.md */; };
 		8D9C12DF2E899DB900AF31B8 /* TextBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8D9C12DE2E899DB900AF31B8 /* TextBuilder */; };
+		8DB3D6462E915E1A0032622C /* todos.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DB3D6452E915E0E0032622C /* todos.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8D9C127D2E87D35400AF31B8 /* Thai.ID.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Thai.ID.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D9C12962E87D5C000AF31B8 /* notes.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = notes.txt; sourceTree = "<group>"; };
 		8D9C12982E87D70600AF31B8 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8DB3D6452E915E0E0032622C /* todos.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = todos.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,6 +45,7 @@
 			children = (
 				8D9C12982E87D70600AF31B8 /* README.md */,
 				8D9C12962E87D5C000AF31B8 /* notes.txt */,
+				8DB3D6452E915E0E0032622C /* todos.txt */,
 				8D9C127F2E87D35400AF31B8 /* Thai.ID */,
 				8D9C12E02E89A0B600AF31B8 /* Frameworks */,
 				8D9C127E2E87D35400AF31B8 /* Products */,
@@ -135,6 +138,7 @@
 			files = (
 				8D9C12972E87D5CC00AF31B8 /* notes.txt in Resources */,
 				8D9C12992E87D70600AF31B8 /* README.md in Resources */,
+				8DB3D6462E915E1A0032622C /* todos.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
