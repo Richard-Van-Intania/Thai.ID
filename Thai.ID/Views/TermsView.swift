@@ -28,7 +28,6 @@ struct TermsView: View {
                         Spacer().frame(width: 16)
                         Button(action: {
                             isAcceptedAgreements = true
-                            path = NavigationPath()
                         }) {
                             Text("accept").font(.custom("FCIconicBold", size: 24))
                                 .foregroundColor(white)
