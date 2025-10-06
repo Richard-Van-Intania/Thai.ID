@@ -8,6 +8,7 @@ enum OnboardingRoute: Hashable {
 enum HomeRoute: Hashable {
     case profileDetailsView
     case profileEditView
+    case createPasscodeView
 
 }
 

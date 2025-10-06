@@ -1,13 +1,27 @@
 import SwiftUI
 
 struct MainView: View {
-    @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
+    @Environment(\.scenePhase) private var scenePhase
 
-    @State private var selectedTab: Int = 0
+    @AppStorage("passcode") private var passcode: String = ""
+    @AppStorage("salt") private var salt: String = ""
+    @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
+    @AppStorage("hideInstruction") private var hideInstruction: Bool = false
+    @AppStorage("exportCount") private var exportCount: Int = 0
+    @AppStorage("locale") private var locale: UserLocale = .th
+    @AppStorage("useBiometric") private var useBiometric: Bool = false
+    @AppStorage("homeViewLayout") private var homeViewLayout: ViewLayout = .list
+    @AppStorage("historyViewLayout") private var historyViewLayout: ViewLayout = .list
+    @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
+    @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+
     @State private var onboardingPath = NavigationPath()
     @State private var homePath = NavigationPath()
     @State private var historyPath = NavigationPath()
     @State private var profilePath = NavigationPath()
+
+    @State private var selectedTab: Int = 0
+    @State private var isLocalAuth: Bool = false
 
     var body: some View {
         ZStack {
@@ -15,10 +29,13 @@ struct MainView: View {
                 NavigationStack(path: $homePath) {
                     HomeView(path: $homePath).navigationDestination(for: HomeRoute.self) { screen in
                         switch screen {
+                        // onbr
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
                             ProfileEditView(path: $homePath)
+                        case .createPasscodeView:
+                            CreatePasscodeView(path: $homePath)
                         }
                     }
                 }
@@ -59,6 +76,26 @@ struct MainView: View {
                     }
                 }
             }.opacity(isAcceptedAgreements ? 0 : 1)
+        }.onChange(of: scenePhase) { oldPhase, newPhase in
+            //            switch newPhase {
+            //            case .active:
+            //                homePath.append(HomeRoute.profileDetailsView)
+            //            case .inactive:
+            //                print("App is inactive.")
+            //            case .background:
+            //                print("App is in the background. Good place to save data.")
+            //            @unknown default:
+            //                print("Unexpected new phase.")
+            //            }
+            // here
+            if newPhase == .active {
+
+                if !isAcceptedAgreements {
+                    homePath.append(HomeRoute.createPasscodeView)
+                }
+                // move onbr to home
+            }
+
         }
     }
 }
