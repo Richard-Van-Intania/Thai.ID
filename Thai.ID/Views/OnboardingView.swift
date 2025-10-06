@@ -11,12 +11,6 @@ struct OnboardingView: View {
 
     var body: some View {
         VStack {
-            Button(action: {
-                path.append(OnboardingRoute.termsView)
-            }) {
-                Text("skip").frame(maxWidth: .infinity, alignment: .trailing)
-                    .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray).padding(.trailing)
-            }.buttonStyle(.plain)
             TabView {
                 ForEach(tipsList.indices, id: \.self) { index in
                     let tip = tipsList[index]
@@ -47,6 +41,15 @@ struct OnboardingView: View {
                     .background(primary_gradient)
                     .clipShape(Capsule())
             }.buttonStyle(.plain)
+        }.toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    path.append(OnboardingRoute.termsView)
+                }) {
+                    Text("skip")
+                        .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray)
+                }.buttonStyle(.plain)
+            }
         }.padding()
     }
 }
