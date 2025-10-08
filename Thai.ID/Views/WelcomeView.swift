@@ -16,14 +16,13 @@ struct WelcomeView: View {
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_black)
                 Text("thai_dot_id")
                     .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_darkblue)
-
             }
             Spacer().frame(height: 16)
             Text("a_credible_solution").frame(maxWidth: .infinity).multilineTextAlignment(.center)
                 .font(.custom("FCIconicRegular", size: 24)).foregroundColor(neutral07)
             Spacer()
             Button(action: {
-                path.append(OnboardingRoute.onboardingView)
+                path.append(HomeRoute.onboardingView)
             }) {
                 Text("get_started").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
@@ -31,7 +30,6 @@ struct WelcomeView: View {
                     .background(primary_gradient)
                     .clipShape(Capsule())
             }.buttonStyle(.plain)
-
-        }.padding()
+        }.padding().navigationBarBackButtonHidden(true)
     }
 }

@@ -14,7 +14,7 @@ struct TermsView: View {
                 if !isAcceptedAgreements {
                     HStack {
                         Button(action: {
-                            path = NavigationPath()
+                            path.removeLast(path.count - 1)
                         }) {
                             Text("decline").font(.custom("FCIconicBold", size: 24))
                                 .foregroundColor(right_gradient)
@@ -28,6 +28,7 @@ struct TermsView: View {
                         Spacer().frame(width: 16)
                         Button(action: {
                             isAcceptedAgreements = true
+                            path = NavigationPath([HomeRoute.createPasscodeView])
                         }) {
                             Text("accept").font(.custom("FCIconicBold", size: 24))
                                 .foregroundColor(white)

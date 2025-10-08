@@ -1,25 +1,20 @@
 import Foundation
 
-enum OnboardingRoute: Hashable {
+enum HomeRoute: Hashable {
+    case welcomeView
     case onboardingView
     case termsView
-}
-
-enum HomeRoute: Hashable {
+    case createPasscodeView
     case profileDetailsView
     case profileEditView
-    case createPasscodeView
-
 }
 
 enum HistoryRoute: Hashable {
     case profileDetailsView
-
 }
 
 enum ProfileRoute: Hashable {
     case profileDetailsView
     case profileEditView
     case termsView
-
 }

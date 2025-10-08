@@ -29,13 +29,19 @@ struct MainView: View {
                 NavigationStack(path: $homePath) {
                     HomeView(path: $homePath).navigationDestination(for: HomeRoute.self) { screen in
                         switch screen {
-                        // onbr
+                        case .welcomeView:
+                            WelcomeView(path: $homePath)
+                        case .onboardingView:
+                            OnboardingView(path: $homePath)
+                        case .termsView:
+                            TermsView(path: $homePath)
+                        case .createPasscodeView:
+                            CreatePasscodeView(path: $homePath)
+                        //
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
                             ProfileEditView(path: $homePath)
-                        case .createPasscodeView:
-                            CreatePasscodeView(path: $homePath)
                         }
                     }
                 }
@@ -66,32 +72,10 @@ struct MainView: View {
                     TabButton(icon: "person.circle", selectedIcon: "person.circle.fill", label: "profile", tab: 2, selectedTab: $selectedTab)
                 }.ignoresSafeArea().background(.white)
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
-            NavigationStack(path: $onboardingPath) {
-                WelcomeView(path: $onboardingPath).navigationDestination(for: OnboardingRoute.self) { screen in
-                    switch screen {
-                    case .onboardingView:
-                        OnboardingView(path: $onboardingPath)
-                    case .termsView:
-                        TermsView(path: $onboardingPath)
-                    }
-                }
-            }.opacity(isAcceptedAgreements ? 0 : 1)
         }.onChange(of: scenePhase) { oldPhase, newPhase in
-            //            switch newPhase {
-            //            case .active:
-            //                homePath.append(HomeRoute.profileDetailsView)
-            //            case .inactive:
-            //                print("App is inactive.")
-            //            case .background:
-            //                print("App is in the background. Good place to save data.")
-            //            @unknown default:
-            //                print("Unexpected new phase.")
-            //            }
-            // here
             if newPhase == .active {
-
                 if !isAcceptedAgreements {
-                    homePath.append(HomeRoute.createPasscodeView)
+                    homePath.append(HomeRoute.welcomeView)
                 }
                 // move onbr to home
             }

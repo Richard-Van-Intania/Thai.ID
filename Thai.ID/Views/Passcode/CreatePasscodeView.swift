@@ -6,6 +6,6 @@ struct CreatePasscodeView: View {
     var body: some View {
         HStack {
             Text("welcome_to")
-        }    .navigationBarBackButtonHidden(true) 
+        }.navigationBarBackButtonHidden(true)
     }
 }

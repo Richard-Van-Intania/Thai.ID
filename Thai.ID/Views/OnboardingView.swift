@@ -18,7 +18,7 @@ struct OnboardingView: View {
                         Image(tip.imageResource).resizable()
                             .scaledToFit().frame(height: 320)
                         Spacer().frame(height: 32)
-                        Text(LocalizedStringKey(tip.head))
+                        Text(LocalizedStringKey(tip.head)).frame(maxWidth: .infinity).multilineTextAlignment(.center)
                             .font(.custom("FCIconicBold", size: 40)).foregroundColor(primary_black)
                         Spacer().frame(height: 16)
                         Text(LocalizedStringKey(tip.body)).frame(maxWidth: .infinity).multilineTextAlignment(.center)
@@ -33,7 +33,7 @@ struct OnboardingView: View {
             }
             Spacer()
             Button(action: {
-                path.append(OnboardingRoute.termsView)
+                path.append(HomeRoute.termsView)
             }) {
                 Text("log_in").font(.custom("FCIconicBold", size: 24))
                     .foregroundColor(white)
@@ -44,7 +44,7 @@ struct OnboardingView: View {
         }.toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    path.append(OnboardingRoute.termsView)
+                    path.append(HomeRoute.termsView)
                 }) {
                     Text("skip")
                         .font(.custom("FCIconicRegular", size: 20)).foregroundColor(secondary_bluegray)
