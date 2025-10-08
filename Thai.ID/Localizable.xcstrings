@@ -716,7 +716,14 @@
       }
     },
     "debugs" : {
-
+      "localizations" : {
+        "th" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ดีบั๊ก"
+          }
+        }
+      }
     },
     "decline" : {
       "extractionState" : "manual",
