@@ -41,7 +41,6 @@ struct MainView: View {
                             ConfirmPasscodeView(path: $homePath)
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(path: $homePath)
-                        //
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
