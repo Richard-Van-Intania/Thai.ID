@@ -37,11 +37,16 @@ struct MainView: View {
                             TermsView(path: $homePath)
                         case .createPasscodeView:
                             CreatePasscodeView(path: $homePath)
+                        case .confirmPasscodeView:
+                            ConfirmPasscodeView(path: $homePath)
+                        case .enterPasscodeLoginView:
+                            EnterPasscodeLoginView(path: $homePath)
                         //
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
                             ProfileEditView(path: $homePath)
+
                         }
                     }
                 }
@@ -74,12 +79,16 @@ struct MainView: View {
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
         }.onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active {
-                if !isAcceptedAgreements {
+                if passcode.isEmpty && salt.isEmpty && !isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
                 }
-                // move onbr to home
+                if passcode.isEmpty && salt.isEmpty && isAcceptedAgreements && !passcodeAsked {
+                    homePath.append(HomeRoute.createPasscodeView)
+                }
+                if !passcode.isEmpty && !salt.isEmpty && isAcceptedAgreements && passcodeAsked {
+                    homePath.append(HomeRoute.enterPasscodeLoginView)
+                }
             }
-
         }
     }
 }

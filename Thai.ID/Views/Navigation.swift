@@ -5,6 +5,10 @@ enum HomeRoute: Hashable {
     case onboardingView
     case termsView
     case createPasscodeView
+    case confirmPasscodeView
+    case enterPasscodeLoginView
+
+    //
     case profileDetailsView
     case profileEditView
 }
