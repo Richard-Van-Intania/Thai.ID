@@ -111,10 +111,10 @@ struct TabButton: View {
                         .font(.custom(selectedTab == tab ? "FCIconicBold" : "FCIconicRegular", size: 12)).foregroundColor(
                             selectedTab == tab ? primary_darkblue : neutral04
                         ).frame(maxHeight: 4)
-                }
+                }.frame(maxWidth: .infinity).padding(.top, 16).contentShape(Rectangle())
             }
         )
-        .buttonStyle(.plain).frame(maxWidth: .infinity).padding(.top, 16)
+        .buttonStyle(.plain)
     }
 }
 
