@@ -80,11 +80,9 @@ struct MainView: View {
             if newPhase == .active {
                 if passcode.isEmpty && salt.isEmpty && !isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
-                }
-                if passcode.isEmpty && salt.isEmpty && isAcceptedAgreements && !passcodeAsked {
+                } else if passcode.isEmpty && salt.isEmpty && isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.createPasscodeView)
-                }
-                if !passcode.isEmpty && !salt.isEmpty && isAcceptedAgreements && passcodeAsked {
+                } else if !passcode.isEmpty && !salt.isEmpty && isAcceptedAgreements && passcodeAsked {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }
