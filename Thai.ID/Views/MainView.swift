@@ -15,7 +15,6 @@ struct MainView: View {
     @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
 
-    @State private var onboardingPath = NavigationPath()
     @State private var homePath = NavigationPath()
     @State private var historyPath = NavigationPath()
     @State private var profilePath = NavigationPath()
@@ -77,7 +76,7 @@ struct MainView: View {
                 }.ignoresSafeArea().background(.white)
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
         }.onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active {
+            if newPhase == .active && !isLocalAuth {
                 if passcode.isEmpty && salt.isEmpty && !isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
                 } else if passcode.isEmpty && salt.isEmpty && isAcceptedAgreements && !passcodeAsked {

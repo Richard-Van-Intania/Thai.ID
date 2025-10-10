@@ -3,6 +3,7 @@ import SwiftUI
 struct CreatePasscodeView: View {
     @Binding var path: NavigationPath
     @State private var passcode: [Int] = []
+    
     var body: some View {
         VStack {
             Text("set_up_pin").frame(maxWidth: .infinity).multilineTextAlignment(.center)
