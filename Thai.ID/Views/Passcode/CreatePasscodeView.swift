@@ -51,8 +51,9 @@ struct CreatePasscodeView: View {
             }
             Spacer()
             Button(action: {
+                passcodeAsked = true
                 isLocalAuth = true
-
+                path = NavigationPath()
             }) {
                 Text("skip")
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
