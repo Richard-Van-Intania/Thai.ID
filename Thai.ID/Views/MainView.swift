@@ -50,6 +50,8 @@ struct MainView: View {
                                 passcodeList: $passcodeList,
                                 passcodeConfirmList: $passcodeConfirmList
                             )
+                        case .authenticationSuccessView:
+                            AuthenticationSuccessView(path: $homePath)
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(path: $homePath)
                         case .profileDetailsView:

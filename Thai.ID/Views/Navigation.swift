@@ -7,6 +7,7 @@ enum HomeRoute: Hashable {
     case createPasscodeView
     case confirmPasscodeView
     case enterPasscodeLoginView
+    case authenticationSuccessView
     case profileDetailsView
     case profileEditView
 }
@@ -20,3 +21,5 @@ enum ProfileRoute: Hashable {
     case profileEditView
     case termsView
 }
+
+// authenticationSuccessView
