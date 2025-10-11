@@ -4,7 +4,8 @@ struct CreatePasscodeView: View {
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
     @Binding var path: NavigationPath
     @Binding var isLocalAuth: Bool
-    @State private var passcode: [Int] = []
+    @Binding var passcodeList: [Int]
+    @Binding var passcodeConfirmList: [Int]
 
     var body: some View {
         VStack {
@@ -14,34 +15,34 @@ struct CreatePasscodeView: View {
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
                 ForEach(0...5, id: \.self) { index in
-                    Indicator(filled: index < passcode.count)
+                    Indicator(filled: index < passcodeList.count)
                 }
             }
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                CircleButton(label: 1, passcode: $passcode)
-                CircleButton(label: 2, passcode: $passcode)
-                CircleButton(label: 3, passcode: $passcode)
+                CircleButton(label: 1, passcode: $passcodeList)
+                CircleButton(label: 2, passcode: $passcodeList)
+                CircleButton(label: 3, passcode: $passcodeList)
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 4, passcode: $passcode)
-                CircleButton(label: 5, passcode: $passcode)
-                CircleButton(label: 6, passcode: $passcode)
+                CircleButton(label: 4, passcode: $passcodeList)
+                CircleButton(label: 5, passcode: $passcodeList)
+                CircleButton(label: 6, passcode: $passcodeList)
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 7, passcode: $passcode)
-                CircleButton(label: 8, passcode: $passcode)
-                CircleButton(label: 9, passcode: $passcode)
+                CircleButton(label: 7, passcode: $passcodeList)
+                CircleButton(label: 8, passcode: $passcodeList)
+                CircleButton(label: 9, passcode: $passcodeList)
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
                 Spacer().frame(width: 88, height: 88).contentShape(Circle())
-                CircleButton(label: 0, passcode: $passcode)
+                CircleButton(label: 0, passcode: $passcodeList)
                 Button(action: {
-                    if !passcode.isEmpty {
-                        passcode.removeLast()
+                    if !passcodeList.isEmpty {
+                        passcodeList.removeLast()
                     }
                 }) {
                     Image(systemName: "delete.left").font(.title)
@@ -59,8 +60,10 @@ struct CreatePasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.background(white).navigationBarBackButtonHidden(true).onChange(of: passcode) { oldValue, newValue in
-            print(passcode)
+        }.background(white).navigationBarBackButtonHidden(true).onChange(of: passcodeList) { oldValue, newValue in
+            if passcodeList.count == 6 {
+                path.append(HomeRoute.confirmPasscodeView)
+            }
         }
     }
 }

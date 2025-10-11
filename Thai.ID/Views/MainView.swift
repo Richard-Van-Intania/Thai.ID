@@ -22,6 +22,9 @@ struct MainView: View {
     @State private var selectedTab: Int = 0
     @State private var isLocalAuth: Bool = false
 
+    @State private var passcodeList: [Int] = []
+    @State private var passcodeConfirmList: [Int] = []
+
     var body: some View {
         ZStack {
             ZStack {
@@ -35,9 +38,19 @@ struct MainView: View {
                         case .termsView:
                             TermsView(path: $homePath)
                         case .createPasscodeView:
-                            CreatePasscodeView(path: $homePath, isLocalAuth: $isLocalAuth)
+                            CreatePasscodeView(
+                                path: $homePath,
+                                isLocalAuth: $isLocalAuth,
+                                passcodeList: $passcodeList,
+                                passcodeConfirmList: $passcodeConfirmList
+                            )
                         case .confirmPasscodeView:
-                            ConfirmPasscodeView(path: $homePath)
+                            ConfirmPasscodeView(
+                                path: $homePath,
+                                isLocalAuth: $isLocalAuth,
+                                passcodeList: $passcodeList,
+                                passcodeConfirmList: $passcodeConfirmList
+                            )
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(path: $homePath)
                         case .profileDetailsView:
