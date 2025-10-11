@@ -71,7 +71,7 @@ struct ConfirmPasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.background(white).onChange(of: passcodeConfirmList) { oldValue, newValue in
+        }.onChange(of: passcodeConfirmList) { oldValue, newValue in
             if passcodeConfirmList.count == 6 {
                 if passcodeConfirmList == passcodeList {
                     isInvalid = false

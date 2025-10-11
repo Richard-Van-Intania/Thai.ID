@@ -65,7 +65,7 @@ struct CreatePasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.background(white).navigationBarBackButtonHidden(true).onChange(of: passcodeList) { oldValue, newValue in
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { oldValue, newValue in
             if passcodeList.count == 6 {
                 path.append(HomeRoute.confirmPasscodeView)
             }
