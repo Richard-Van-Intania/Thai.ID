@@ -35,7 +35,7 @@ struct MainView: View {
                         case .termsView:
                             TermsView(path: $homePath)
                         case .createPasscodeView:
-                            CreatePasscodeView(path: $homePath)
+                            CreatePasscodeView(path: $homePath, isLocalAuth: $isLocalAuth)
                         case .confirmPasscodeView:
                             ConfirmPasscodeView(path: $homePath)
                         case .enterPasscodeLoginView:

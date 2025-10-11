@@ -3,8 +3,8 @@ import SwiftUI
 import TextBuilder
 
 struct TermsView: View {
-    @Binding var path: NavigationPath
     @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
+    @Binding var path: NavigationPath
 
     var body: some View {
         ScrollView {
