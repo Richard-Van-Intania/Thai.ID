@@ -26,9 +26,9 @@ struct MainView: View {
     @State private var passcodeConfirmList: [Int] = []
 
     @State private var createAccountSuccess: Bool = false
-    @State private var biometricsAskDialog = false
-    @State private var biometricsSuccessDialog = false
-    @State private var biometricsFailedDialog = false
+    @State private var biometricsAskDialog: Bool = false
+    @State private var biometricsSuccessDialog: Bool = false
+    @State private var biometricsFailedDialog: Bool = false
 
     var body: some View {
         ZStack {
@@ -177,6 +177,3 @@ struct TabButton: View {
 #Preview {
     MainView().environment(\.locale, Locale(identifier: "th"))
 }
-
-
-// use createAccountSuccess
