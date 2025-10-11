@@ -25,6 +25,11 @@ struct MainView: View {
     @State private var passcodeList: [Int] = []
     @State private var passcodeConfirmList: [Int] = []
 
+    @State private var createAccountSuccess: Bool = false
+    @State private var biometricsAskDialog = false
+    @State private var biometricsSuccessDialog = false
+    @State private var biometricsFailedDialog = false
+
     var body: some View {
         ZStack {
             ZStack {
@@ -47,6 +52,7 @@ struct MainView: View {
                             ConfirmPasscodeView(
                                 path: $homePath,
                                 isLocalAuth: $isLocalAuth,
+                                createAccountSuccess: $createAccountSuccess,
                                 passcodeList: $passcodeList,
                                 passcodeConfirmList: $passcodeConfirmList
                             )
@@ -99,6 +105,43 @@ struct MainView: View {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }
+        }.alert(
+            "use_biometrics",
+            isPresented: $biometricsAskDialog,
+            actions: {
+                Button("enable", role: .none) {
+                    authenticateWithBiometrics(completion: { success, authenticationError in
+                        useBiometric = success
+                        if success {
+                            biometricsSuccessDialog = true
+                        } else {
+                            biometricsFailedDialog = true
+                        }
+                    })
+                }
+                Button("not_now", role: .cancel) {
+                    useBiometric = false
+                }
+            },
+            message: {
+                Text("enable_biometrics")
+            }
+        ).alert(
+            "enable_biometrics_success",
+            isPresented: $biometricsSuccessDialog,
+            actions: {
+                Button("ok", role: .none) {}
+            },
+        ).alert(
+            "unable_use_biometrics",
+            isPresented: $biometricsFailedDialog,
+            actions: {
+                Button("ok", role: .none) {}
+            },
+        ).onAppear {
+            if createAccountSuccess {
+                //
+            }
         }
     }
 }
@@ -134,3 +177,6 @@ struct TabButton: View {
 #Preview {
     MainView().environment(\.locale, Locale(identifier: "th"))
 }
+
+
+// use createAccountSuccess
