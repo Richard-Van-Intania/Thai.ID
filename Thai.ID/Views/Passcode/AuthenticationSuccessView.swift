@@ -4,9 +4,19 @@ struct AuthenticationSuccessView: View {
     @Binding var path: NavigationPath
 
     var body: some View {
-        VStack {}.navigationBarBackButtonHidden(true).onAppear {
+        VStack {
+            Image("create_sucess").resizable()
+                .scaledToFit().frame(height: 160)
+            Spacer().frame(height: 24)
+            Text("set_up_pin_success")
+                .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
+        }.navigationBarBackButtonHidden(true).onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 path = NavigationPath()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+
+                    // here biometicx
+                }
             }
         }
     }
