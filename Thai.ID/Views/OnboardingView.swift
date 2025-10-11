@@ -31,7 +31,7 @@ struct OnboardingView: View {
                 UIPageControl.appearance().currentPageIndicatorTintColor = UIColor(primary_red)
                 UIPageControl.appearance().pageIndicatorTintColor = UIColor(secondary_gray)
             }
-            Spacer()
+            Spacer(minLength: 24)
             Button(action: {
                 path.append(HomeRoute.termsView)
             }) {
