@@ -1,3 +1,4 @@
+import BCryptSwift
 import SwiftUI
 
 struct ConfirmPasscodeView: View {
@@ -75,7 +76,26 @@ struct ConfirmPasscodeView: View {
             if passcodeConfirmList.count == 6 {
                 if passcodeConfirmList == passcodeList {
                     isInvalid = false
-                    //
+                    passcodeAsked = true
+                    isLocalAuth = true
+                    var concatenationPasscode = ""
+                    for pc in passcodeConfirmList {
+                        concatenationPasscode += String(pc)
+                    }
+                    do {
+                        let generatedSalt: String = try BCryptSwiftModern.generateSalt()
+                        let hashedPasscode: String = try BCryptSwiftModern.hashPassword(concatenationPasscode, withSalt: generatedSalt)
+                        salt = generatedSalt
+                        passcode = hashedPasscode
+                        path.append(HomeRoute.authenticationSuccessView)
+                    } catch {
+                        salt = ""
+                        passcode = ""
+                        passcodeAsked = false
+                        isLocalAuth = false
+                        path = NavigationPath()
+                        // dialog
+                    }
                 } else {
                     passcodeConfirmList.removeAll()
                     isInvalid = true

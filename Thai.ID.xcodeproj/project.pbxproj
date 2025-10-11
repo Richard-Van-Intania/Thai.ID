@@ -11,6 +11,7 @@
 		8D9C12992E87D70600AF31B8 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8D9C12982E87D70600AF31B8 /* README.md */; };
 		8D9C12DF2E899DB900AF31B8 /* TextBuilder in Frameworks */ = {isa = PBXBuildFile; productRef = 8D9C12DE2E899DB900AF31B8 /* TextBuilder */; };
 		8DB3D6462E915E1A0032622C /* todos.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8DB3D6452E915E0E0032622C /* todos.txt */; };
+		8DBC621C2E9A4B6500606F54 /* BCryptSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8DBC621B2E9A4B6500606F54 /* BCryptSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8DBC621C2E9A4B6500606F54 /* BCryptSwift in Frameworks */,
 				8D9C12DF2E899DB900AF31B8 /* TextBuilder in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -88,6 +90,7 @@
 			name = Thai.ID;
 			packageProductDependencies = (
 				8D9C12DE2E899DB900AF31B8 /* TextBuilder */,
+				8DBC621B2E9A4B6500606F54 /* BCryptSwift */,
 			);
 			productName = Thai.ID;
 			productReference = 8D9C127D2E87D35400AF31B8 /* Thai.ID.app */;
@@ -120,6 +123,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				8D9C12DD2E899DB900AF31B8 /* XCRemoteSwiftPackageReference "TextBuilder" */,
+				8DBC621A2E9A4B6500606F54 /* XCRemoteSwiftPackageReference "BCryptSwift" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 8D9C127E2E87D35400AF31B8 /* Products */;
@@ -388,6 +392,14 @@
 				minimumVersion = 4.0.2;
 			};
 		};
+		8DBC621A2E9A4B6500606F54 /* XCRemoteSwiftPackageReference "BCryptSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wisetail/BCryptSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -395,6 +407,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8D9C12DD2E899DB900AF31B8 /* XCRemoteSwiftPackageReference "TextBuilder" */;
 			productName = TextBuilder;
+		};
+		8DBC621B2E9A4B6500606F54 /* BCryptSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8DBC621A2E9A4B6500606F54 /* XCRemoteSwiftPackageReference "BCryptSwift" */;
+			productName = BCryptSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

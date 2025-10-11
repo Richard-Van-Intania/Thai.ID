@@ -1,6 +1,15 @@
 {
-  "originHash" : "88022a1780821c3e0cb418bc9c1c5ccf4147c6f9390dc941de70d8e01832419e",
+  "originHash" : "6181057d6fac93bb6dc21902a110651fd969b05c07853b639135fc1a7fbab401",
   "pins" : [
+    {
+      "identity" : "bcryptswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wisetail/BCryptSwift.git",
+      "state" : {
+        "revision" : "9d89409837466ed5e51eb0c1e57cbd88e5d7d89d",
+        "version" : "2.0.1"
+      }
+    },
     {
       "identity" : "swift-builders",
       "kind" : "remoteSourceControl",
