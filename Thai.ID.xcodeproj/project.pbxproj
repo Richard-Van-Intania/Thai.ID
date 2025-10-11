@@ -295,6 +295,7 @@
 				INFOPLIST_FILE = "Thai-ID-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Thai.ID;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID / Touch ID to securely authenticate you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -334,6 +335,7 @@
 				INFOPLIST_FILE = "Thai-ID-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Thai.ID;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We use Face ID / Touch ID to securely authenticate you.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

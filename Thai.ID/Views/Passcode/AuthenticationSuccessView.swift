@@ -14,8 +14,7 @@ struct AuthenticationSuccessView: View {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 path = NavigationPath()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-
-                    // here biometicx
+                    authenticateWithBiometrics(completion: { success, authenticationError in print(success) })
                 }
             }
         }
