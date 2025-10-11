@@ -5,7 +5,6 @@ struct CreatePasscodeView: View {
     @Binding var path: NavigationPath
     @Binding var isLocalAuth: Bool
     @Binding var passcodeList: [Int]
-    @Binding var passcodeConfirmList: [Int]
 
     var body: some View {
         VStack {
@@ -38,14 +37,20 @@ struct CreatePasscodeView: View {
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                Spacer().frame(width: 88, height: 88).contentShape(Circle())
+                Button(action: {
+                    passcodeList.removeAll()
+                }) {
+                    Image(systemName: "trash").font(.title2)
+                        .foregroundColor(primary_darkblue)
+                        .frame(width: 88, height: 88).contentShape(Circle())
+                }.buttonStyle(.plain)
                 CircleButton(label: 0, passcode: $passcodeList)
                 Button(action: {
                     if !passcodeList.isEmpty {
                         passcodeList.removeLast()
                     }
                 }) {
-                    Image(systemName: "delete.left").font(.title)
+                    Image(systemName: "delete.left").font(.title2)
                         .foregroundColor(primary_darkblue)
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)

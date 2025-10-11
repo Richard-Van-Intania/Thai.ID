@@ -41,8 +41,7 @@ struct MainView: View {
                             CreatePasscodeView(
                                 path: $homePath,
                                 isLocalAuth: $isLocalAuth,
-                                passcodeList: $passcodeList,
-                                passcodeConfirmList: $passcodeConfirmList
+                                passcodeList: $passcodeList
                             )
                         case .confirmPasscodeView:
                             ConfirmPasscodeView(
