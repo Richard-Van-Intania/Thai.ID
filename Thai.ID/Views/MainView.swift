@@ -56,9 +56,12 @@ struct MainView: View {
                             )
                         case .authenticationSuccessView:
                             AuthenticationSuccessView(path: $homePath, biometricsAskDialog: $biometricsAskDialog)
-                        //
                         case .enterPasscodeLoginView:
-                            EnterPasscodeLoginView(path: $homePath)
+                            EnterPasscodeLoginView(
+                                path: $homePath,
+                                isLocalAuth: $isLocalAuth,
+                                passcodeList: $passcodeList,
+                            )
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
