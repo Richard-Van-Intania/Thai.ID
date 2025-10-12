@@ -102,7 +102,6 @@ func termsAndConditions() -> Text {
         .font(.custom("FCIconicRegular", size: 18)).foregroundColor(neutral06)
     Text(agree)
         .font(.custom("FCIconicBold", size: 18)).foregroundColor(primary_black)
-
 }
 
 let paragraph1 = "บริษัท ฟินีม่า จำกัด (ซึ่งต่อไปในประกาศนี้ เรียกว่า "
