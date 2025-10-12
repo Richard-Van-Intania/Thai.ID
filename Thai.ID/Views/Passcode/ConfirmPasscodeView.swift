@@ -4,12 +4,10 @@ import SwiftUI
 struct ConfirmPasscodeView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("salt") private var salt: String = ""
-    @AppStorage("useBiometric") private var useBiometric: Bool = false
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
 
     @Binding var path: NavigationPath
     @Binding var isLocalAuth: Bool
-    @Binding var createAccountSuccess: Bool
     @Binding var passcodeList: [Int]
     @Binding var passcodeConfirmList: [Int]
 
@@ -69,7 +67,6 @@ struct ConfirmPasscodeView: View {
             Button(action: {
                 passcodeAsked = true
                 isLocalAuth = true
-                createAccountSuccess = true
                 path = NavigationPath()
             }) {
                 Text("skip")
@@ -82,7 +79,6 @@ struct ConfirmPasscodeView: View {
                     isInvalid = false
                     passcodeAsked = true
                     isLocalAuth = true
-                    createAccountSuccess = true
                     var concatenationPasscode = ""
                     for pc in passcodeConfirmList {
                         concatenationPasscode += String(pc)
@@ -94,11 +90,9 @@ struct ConfirmPasscodeView: View {
                         passcode = hashedPasscode
                         path.append(HomeRoute.authenticationSuccessView)
                     } catch {
+                        passcodeAsked = false
                         salt = ""
                         passcode = ""
-                        passcodeAsked = false
-                        isLocalAuth = false
-                        createAccountSuccess = false
                         path = NavigationPath()
                         // dialog
                     }
