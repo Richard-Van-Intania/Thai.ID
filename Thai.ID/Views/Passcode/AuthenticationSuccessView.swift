@@ -2,6 +2,7 @@ import SwiftUI
 
 struct AuthenticationSuccessView: View {
     @Binding var path: NavigationPath
+    @Binding var biometricsAskDialog: Bool
 
     var body: some View {
         VStack {
@@ -13,6 +14,9 @@ struct AuthenticationSuccessView: View {
         }.navigationBarBackButtonHidden(true).onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                 path = NavigationPath()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    biometricsAskDialog = true
+                }
             }
         }
     }

@@ -13,6 +13,7 @@ struct ConfirmPasscodeView: View {
 
     @State private var isInvalid = false
     @State private var shakeCount = 0
+    @State private var storePasscodeFailedDialog: Bool = false
 
     var body: some View {
         VStack {
@@ -93,8 +94,7 @@ struct ConfirmPasscodeView: View {
                         passcodeAsked = false
                         salt = ""
                         passcode = ""
-                        path = NavigationPath()
-                        // dialog
+                        storePasscodeFailedDialog = true
                     }
                 } else {
                     passcodeConfirmList.removeAll()
@@ -104,7 +104,15 @@ struct ConfirmPasscodeView: View {
                     }
                 }
             }
-        }.onDisappear {
+        }.alert(
+            "wrong",
+            isPresented: $storePasscodeFailedDialog,
+            actions: {
+                Button("ok", role: .none) {
+                    path = NavigationPath()
+                }
+            },
+        ).onDisappear {
             passcodeList.removeAll()
             passcodeConfirmList.removeAll()
         }
