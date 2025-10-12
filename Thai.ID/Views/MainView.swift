@@ -162,11 +162,11 @@ struct TabButton: View {
                 VStack {
                     Image(systemName: selectedTab == tab ? selectedIcon : icon)
                         .foregroundColor(selectedTab == tab ? primary_darkblue : neutral04)
-                        .font(.system(size: 24))
+                        .font(.title)
                     Text(LocalizedStringKey(label))
                         .font(.custom(selectedTab == tab ? "FCIconicBold" : "FCIconicRegular", size: 12)).foregroundColor(
                             selectedTab == tab ? primary_darkblue : neutral04
-                        ).frame(maxHeight: 4)
+                        ).frame(maxHeight: 8)
                 }.frame(maxWidth: .infinity).padding(.top, 16).contentShape(Rectangle())
             }
         )

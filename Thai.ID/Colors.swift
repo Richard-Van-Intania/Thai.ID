@@ -42,6 +42,7 @@ let primary_darkblue = Color(hex: "#094483")
 
 let neutral01 = Color(hex: "#F6F7F9")
 let neutral04 = Color(hex: "#B2BAC7")
+let neutral05 = Color(hex: "#8895A8")
 let neutral06 = Color(hex: "#69778E")
 let neutral07 = Color(hex: "#546075")
 
@@ -50,4 +51,4 @@ let secondary_bluegray = Color(hex: "#B2BAC7")
 let primary_red = Color(hex: "#B3001B")
 let secondary_gray = Color(hex: "#D6DAE1")
 
-//
+// #8895A8
