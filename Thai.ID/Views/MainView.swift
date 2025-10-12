@@ -96,11 +96,11 @@ struct MainView: View {
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
         }.onChange(of: scenePhase) { oldPhase, newPhase in
             if newPhase == .active && !isLocalAuth {
-                if passcode.isEmpty && salt.isEmpty && !isAcceptedAgreements && !passcodeAsked {
+                if passcode.isEmpty && !isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
-                } else if passcode.isEmpty && salt.isEmpty && isAcceptedAgreements && !passcodeAsked {
+                } else if passcode.isEmpty && isAcceptedAgreements && !passcodeAsked {
                     homePath.append(HomeRoute.createPasscodeView)
-                } else if !passcode.isEmpty && !salt.isEmpty && isAcceptedAgreements && passcodeAsked {
+                } else if !passcode.isEmpty && isAcceptedAgreements && passcodeAsked {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }
