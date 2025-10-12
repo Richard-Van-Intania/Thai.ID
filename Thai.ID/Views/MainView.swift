@@ -4,7 +4,6 @@ struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
 
     @AppStorage("passcode") private var passcode: String = ""
-    @AppStorage("salt") private var salt: String = ""
     @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
     @AppStorage("hideInstruction") private var hideInstruction: Bool = false
     @AppStorage("exportCount") private var exportCount: Int = 0

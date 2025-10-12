@@ -3,7 +3,6 @@ import SwiftUI
 
 struct ConfirmPasscodeView: View {
     @AppStorage("passcode") private var passcode: String = ""
-    @AppStorage("salt") private var salt: String = ""
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
 
     @Binding var path: NavigationPath
@@ -87,12 +86,10 @@ struct ConfirmPasscodeView: View {
                     do {
                         let generatedSalt: String = try BCryptSwiftModern.generateSalt()
                         let hashedPasscode: String = try BCryptSwiftModern.hashPassword(concatenationPasscode, withSalt: generatedSalt)
-                        salt = generatedSalt
                         passcode = hashedPasscode
                         path.append(HomeRoute.authenticationSuccessView)
                     } catch {
                         passcodeAsked = false
-                        salt = ""
                         passcode = ""
                         storePasscodeFailedDialog = true
                     }
