@@ -15,17 +15,17 @@ struct MainView: View {
     @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
 
+    @State private var selectedTab: Int = 0
+
     @State private var homePath = NavigationPath()
     @State private var historyPath = NavigationPath()
     @State private var profilePath = NavigationPath()
 
-    @State private var selectedTab: Int = 0
     @State private var isLocalAuth: Bool = false
 
     @State private var passcodeList: [Int] = []
     @State private var passcodeConfirmList: [Int] = []
 
-    @State private var createAccountSuccess: Bool = false
     @State private var biometricsAskDialog: Bool = false
     @State private var biometricsSuccessDialog: Bool = false
     @State private var biometricsFailedDialog: Bool = false
@@ -52,12 +52,12 @@ struct MainView: View {
                             ConfirmPasscodeView(
                                 path: $homePath,
                                 isLocalAuth: $isLocalAuth,
-                                createAccountSuccess: $createAccountSuccess,
                                 passcodeList: $passcodeList,
                                 passcodeConfirmList: $passcodeConfirmList
                             )
                         case .authenticationSuccessView:
-                            AuthenticationSuccessView(path: $homePath)
+                            AuthenticationSuccessView(path: $homePath, biometricsAskDialog: $biometricsAskDialog)
+                        //
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(path: $homePath)
                         case .profileDetailsView:
@@ -139,9 +139,7 @@ struct MainView: View {
                 Button("ok", role: .none) {}
             },
         ).onAppear {
-            if createAccountSuccess {
-                //
-            }
+            //
         }
     }
 }
