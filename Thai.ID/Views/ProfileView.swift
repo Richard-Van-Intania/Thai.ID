@@ -25,7 +25,7 @@ struct ProfileView: View {
                         .foregroundColor(neutral05)
                 }.buttonStyle(.plain)
                 Spacer().frame(width: 8)
-            }.padding(16).frame(maxWidth: .infinity).background(Color.white)
+            }.padding(16).frame(maxWidth: .infinity).background(white)
                 .cornerRadius(16).shadow(radius: 1).padding(.horizontal)
             VStack(alignment: .leading) {
                 Spacer().frame(height: 32)
@@ -38,7 +38,7 @@ struct ProfileView: View {
                 SettingsMenu(label: "help_support", onButtonTap: {})
                 Spacer().frame(height: 24)
             }
-            .frame(maxWidth: .infinity).background(Color.white)
+            .frame(maxWidth: .infinity).background(white)
             .cornerRadius(16).shadow(radius: 1).padding(.horizontal)
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).background(neutral01).toolbar {
             ToolbarItem(placement: .principal) {
