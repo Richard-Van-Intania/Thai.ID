@@ -9,7 +9,7 @@ extension Color {
         let g: UInt64
         let b: UInt64
         switch hex.count {
-        case 6: // RGB (24-bit)
+        case 6:  // RGB (24-bit)
             (r, g, b) = ((int >> 16) & 0xFF, (int >> 8) & 0xFF, int & 0xFF)
         default:
             (r, g, b) = (1, 1, 0)
@@ -46,9 +46,11 @@ let neutral05 = Color(hex: "#8895A8")
 let neutral06 = Color(hex: "#69778E")
 let neutral07 = Color(hex: "#546075")
 
+let blue05 = Color(hex: "#8EACD0")
+
 let secondary_bluegray = Color(hex: "#B2BAC7")
 
 let primary_red = Color(hex: "#B3001B")
 let secondary_gray = Color(hex: "#D6DAE1")
 
-// #8895A8
+// #8895A8 blue05 #8EACD0
