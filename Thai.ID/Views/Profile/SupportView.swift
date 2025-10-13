@@ -1,8 +1,6 @@
 import SwiftUI
 
-let recipient = "contact@thai.id"
-let subject = "App Feedback"
-let body = "I have some feedback about the app..."
+let email = "contact@thai.id"
 
 struct SupportView: View {
     @Environment(\.openURL) private var openURL
@@ -15,9 +13,16 @@ struct SupportView: View {
                 .foregroundColor(primary_black).padding(.horizontal)
             Spacer().frame(height: 32)
             Button(action: {
-                //
+                let subject = String(localized: "subject")
+                let body = String(localized: "body")
+                let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let urlString = "mailto:\(email)?subject=\(subjectEncoded)&body=\(bodyEncoded)"
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url)
+                }
             }) {
-                Text(recipient)
+                Text(email)
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(blue05).underline()
             }.buttonStyle(.plain)
             Spacer()
