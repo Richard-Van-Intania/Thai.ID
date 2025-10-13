@@ -5,7 +5,7 @@ struct ProfileView: View {
 
     var body: some View {
         VStack(
-            spacing: 16
+            spacing: 16,
         ) {
             HStack {
                 Image("thai_id_app_icon").resizable()
@@ -31,11 +31,11 @@ struct ProfileView: View {
                 Spacer().frame(height: 32)
                 Text("settings").font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black).padding(.horizontal, 24)
                 Spacer().frame(height: 24)
-                SettingsMenu(label: "login_settings", onButtonTap: {})
-                SettingsMenu(label: "language", onButtonTap: {})
-                SettingsMenu(label: "privacy_policy", onButtonTap: {})
-                SettingsMenu(label: "terms", onButtonTap: {})
-                SettingsMenu(label: "help_support", onButtonTap: {})
+                SettingsMenu(label: "login_settings", onButtonTap: { path.append(ProfileRoute.settingsView) })
+                SettingsMenu(label: "language", onButtonTap: { path.append(ProfileRoute.localizationSettingsView) })
+                SettingsMenu(label: "privacy_policy", onButtonTap: { path.append(ProfileRoute.policyAndSafetyView) })
+                SettingsMenu(label: "terms", onButtonTap: { path.append(ProfileRoute.termsView) })
+                SettingsMenu(label: "help_support", onButtonTap: { path.append(ProfileRoute.supportView) })
                 Spacer().frame(height: 24)
             }
             .frame(maxWidth: .infinity).background(white)

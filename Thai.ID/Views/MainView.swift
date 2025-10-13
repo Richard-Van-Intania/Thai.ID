@@ -42,17 +42,13 @@ struct MainView: View {
                         case .termsView:
                             TermsView(path: $homePath)
                         case .createPasscodeView:
-                            CreatePasscodeView(
-                                path: $homePath,
-                                isLocalAuth: $isLocalAuth,
-                                passcodeList: $passcodeList
-                            )
+                            CreatePasscodeView(path: $homePath, isLocalAuth: $isLocalAuth, passcodeList: $passcodeList)
                         case .confirmPasscodeView:
                             ConfirmPasscodeView(
                                 path: $homePath,
                                 isLocalAuth: $isLocalAuth,
                                 passcodeList: $passcodeList,
-                                passcodeConfirmList: $passcodeConfirmList
+                                passcodeConfirmList: $passcodeConfirmList,
                             )
                         case .authenticationSuccessView:
                             AuthenticationSuccessView(path: $homePath, biometricsAskDialog: $biometricsAskDialog)
@@ -66,7 +62,6 @@ struct MainView: View {
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
                             ProfileEditView(path: $homePath)
-
                         }
                     }
                 }
@@ -82,8 +77,16 @@ struct MainView: View {
                             ProfileDetailsView(path: $profilePath)
                         case .profileEditView:
                             ProfileEditView(path: $profilePath)
+                        case .settingsView:
+                            SettingsView(path: $profilePath)
+                        case .localizationSettingsView:
+                            LocalizationSettingsView(path: $profilePath)
+                        case .policyAndSafetyView:
+                            PolicyAndSafetyView(path: $profilePath)
                         case .termsView:
                             TermsView(path: $profilePath)
+                        case .supportView:
+                            SupportView(path: $profilePath)
                         }
                     }
                 }
@@ -97,13 +100,13 @@ struct MainView: View {
                     TabButton(icon: "person.circle", selectedIcon: "person.circle.fill", label: "profile", tab: 2, selectedTab: $selectedTab)
                 }.ignoresSafeArea().background(.white)
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
-        }.onChange(of: scenePhase) { oldPhase, newPhase in
-            if newPhase == .active && !isLocalAuth {
-                if passcode.isEmpty && !isAcceptedAgreements && !passcodeAsked {
+        }.onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active, !isLocalAuth {
+                if passcode.isEmpty, !isAcceptedAgreements, !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
-                } else if passcode.isEmpty && isAcceptedAgreements && !passcodeAsked {
+                } else if passcode.isEmpty, isAcceptedAgreements, !passcodeAsked {
                     homePath.append(HomeRoute.createPasscodeView)
-                } else if !passcode.isEmpty && isAcceptedAgreements && passcodeAsked {
+                } else if !passcode.isEmpty, isAcceptedAgreements, passcodeAsked {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }
@@ -112,7 +115,7 @@ struct MainView: View {
             isPresented: $biometricsAskDialog,
             actions: {
                 Button("enable", role: .none) {
-                    authenticateWithBiometrics(completion: { success, authenticationError in
+                    authenticateWithBiometrics(completion: { success, _ in
                         useBiometric = success
                         if success {
                             biometricsSuccessDialog = true
@@ -127,7 +130,7 @@ struct MainView: View {
             },
             message: {
                 Text("enable_biometrics")
-            }
+            },
         ).alert(
             "enable_biometrics_success",
             isPresented: $biometricsSuccessDialog,
@@ -165,10 +168,10 @@ struct TabButton: View {
                         .font(.title)
                     Text(LocalizedStringKey(label))
                         .font(.custom(selectedTab == tab ? "FCIconicBold" : "FCIconicRegular", size: 12)).foregroundColor(
-                            selectedTab == tab ? primary_darkblue : neutral04
+                            selectedTab == tab ? primary_darkblue : neutral04,
                         ).frame(maxHeight: 8)
                 }.frame(maxWidth: .infinity).padding(.top, 16).contentShape(Rectangle())
-            }
+            },
         )
         .buttonStyle(.plain)
     }

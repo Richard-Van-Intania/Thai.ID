@@ -24,7 +24,7 @@ struct CircleButton: View {
                 .frame(width: 88, height: 88)
                 .background(
                     Circle()
-                        .stroke(primary_darkblue, lineWidth: 1)
+                        .stroke(primary_darkblue, lineWidth: 1),
                 ).contentShape(Circle())
         }.buttonStyle(.plain)
     }

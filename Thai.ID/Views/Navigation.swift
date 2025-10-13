@@ -19,7 +19,11 @@ enum HistoryRoute: Hashable {
 enum ProfileRoute: Hashable {
     case profileDetailsView
     case profileEditView
+    case settingsView
+    case localizationSettingsView
+    case policyAndSafetyView
     case termsView
+    case supportView
 }
 
-// authenticationSuccessView
+// authenticationSuccessView  case supportView

@@ -22,7 +22,7 @@ struct TermsView: View {
                                 .background(white)
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 56)
-                                        .stroke(right_gradient, lineWidth: 2)
+                                        .stroke(right_gradient, lineWidth: 2),
                                 )
                         }.buttonStyle(.plain)
                         Spacer().frame(width: 16)

@@ -19,7 +19,7 @@ struct EnterPasscodeLoginView: View {
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                ForEach(0...5, id: \.self) { index in
+                ForEach(0 ... 5, id: \.self) { index in
                     Indicator(filled: index < passcodeList.count)
                 }
             }
@@ -45,7 +45,7 @@ struct EnterPasscodeLoginView: View {
             HStack(spacing: 24) {
                 if useBiometric {
                     Button(action: {
-                        authenticateWithBiometrics(completion: { success, authenticationError in
+                        authenticateWithBiometrics(completion: { success, _ in
                             if success {
                                 isInvalid = false
                                 isLocalAuth = true
@@ -81,7 +81,7 @@ struct EnterPasscodeLoginView: View {
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)
             }
-        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { oldValue, newValue in
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { _, _ in
             if passcodeList.count == 6 {
                 var concatenationPasscode = ""
                 for pc in passcodeList {

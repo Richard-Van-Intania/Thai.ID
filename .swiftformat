@@ -1,0 +1,5 @@
+--indent 4
+--maxwidth 160
+--semicolons never
+--emptybraces no-space
+--swift-version 6.2

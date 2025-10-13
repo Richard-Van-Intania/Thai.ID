@@ -1,27 +1,27 @@
 enum ViewLayout: String, CaseIterable, Identifiable {
-    case list = "list"
-    case thumbnails = "thumbnails"
+    case list
+    case thumbnails
 
-    var id: String { self.rawValue }
+    var id: String { rawValue }
 
     var displayName: String {
         switch self {
-        case .list: return "List"
-        case .thumbnails: return "Thumbnails"
+        case .list: "List"
+        case .thumbnails: "Thumbnails"
         }
     }
 }
 
 enum UserLocale: String, CaseIterable, Identifiable {
-    case th = "th"
-    case en = "en"
+    case th
+    case en
 
-    var id: String { self.rawValue }
+    var id: String { rawValue }
 
     var displayName: String {
         switch self {
-        case .th: return "Thai"
-        case .en: return "English"
+        case .th: "Thai"
+        case .en: "English"
         }
     }
 }

@@ -21,7 +21,7 @@ struct ConfirmPasscodeView: View {
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                ForEach(0...5, id: \.self) { index in
+                ForEach(0 ... 5, id: \.self) { index in
                     Indicator(filled: index < passcodeConfirmList.count)
                 }
             }.modifier(Shake(animatableData: CGFloat(shakeCount)))
@@ -73,7 +73,7 @@ struct ConfirmPasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.onChange(of: passcodeConfirmList) { oldValue, newValue in
+        }.onChange(of: passcodeConfirmList) { _, _ in
             if passcodeConfirmList.count == 6 {
                 if passcodeConfirmList == passcodeList {
                     isInvalid = false
@@ -121,13 +121,13 @@ struct Shake: GeometryEffect {
     var shakesPerUnit = 3
     var animatableData: CGFloat
 
-    func effectValue(size: CGSize) -> ProjectionTransform {
+    func effectValue(size _: CGSize) -> ProjectionTransform {
         ProjectionTransform(
             CGAffineTransform(
                 translationX:
-                    amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
-                y: 0
-            )
+                amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+                y: 0,
+            ),
         )
     }
 }

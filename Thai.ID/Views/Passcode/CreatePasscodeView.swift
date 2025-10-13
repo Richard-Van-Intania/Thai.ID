@@ -13,7 +13,7 @@ struct CreatePasscodeView: View {
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                ForEach(0...5, id: \.self) { index in
+                ForEach(0 ... 5, id: \.self) { index in
                     Indicator(filled: index < passcodeList.count)
                 }
             }
@@ -65,7 +65,7 @@ struct CreatePasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { oldValue, newValue in
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { _, _ in
             if passcodeList.count == 6 {
                 path.append(HomeRoute.confirmPasscodeView)
             }
