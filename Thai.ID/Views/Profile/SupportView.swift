@@ -8,8 +8,8 @@ struct SupportView: View {
     var body: some View {
         VStack {
             Spacer().frame(height: 32)
-            Text("if_you_encounter").lineSpacing(8).frame(maxWidth: .infinity).multilineTextAlignment(.center)
-                .font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_black)
+            Text("if_you_encounter").lineSpacing(8).frame(maxWidth: .infinity).multilineTextAlignment(.center).font(.custom("FCIconicRegular", size: 20))
+                .foregroundColor(primary_black)
             Spacer().frame(height: 8)
 
         }.frame(maxWidth: .infinity, maxHeight: .infinity).background(white).toolbar {
