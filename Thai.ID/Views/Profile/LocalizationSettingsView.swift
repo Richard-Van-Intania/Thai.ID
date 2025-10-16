@@ -6,7 +6,7 @@ struct LocalizationSettingsView: View {
 
     var body: some View {
         VStack {
-            Spacer().frame(height: 24)
+            Spacer().frame(height: 16)
             Group {
                 Button(action: {
                     if let url = URL(string: UIApplication.openSettingsURLString),
