@@ -6,6 +6,12 @@ struct SupportView: View {
     @Environment(\.openURL) private var openURL
     @Binding var path: NavigationPath
 
+    var appVersion: String {
+        let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
+        return "\(String(localized: "version")) \(version) (Build \(build))"
+    }
+
     var body: some View {
         VStack {
             Spacer().frame(height: 32)
@@ -26,7 +32,9 @@ struct SupportView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(blue05).underline()
             }.buttonStyle(.plain)
             Spacer()
-
+            Text(appVersion)
+                .font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
+            Spacer().frame(height: 32)
         }.frame(maxWidth: .infinity, maxHeight: .infinity).background(white).toolbar {
             ToolbarItem(placement: .principal) {
                 Text("help_support").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
