@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 
 struct MainView: View {
@@ -24,6 +25,8 @@ struct MainView: View {
 
     @State private var passcodeList: [Int] = []
     @State private var passcodeConfirmList: [Int] = []
+
+    @StateObject private var passcodeModel = PasscodeModel()
 
     @State private var biometricsAskDialog: Bool = false
     @State private var biometricsSuccessDialog: Bool = false
@@ -184,4 +187,51 @@ struct TabButton: View {
 
 #Preview {
     MainView().environment(\.locale, Locale(identifier: "th"))
+}
+
+class PasscodeModel: ObservableObject {
+    @Published var passcodeList: [Int] = []
+    @Published var passcodeConfirmList: [Int] = []
+
+    func passcodeAdd(code: Int) {
+        if passcodeList.count < 6 { passcodeList.append(code) }
+    }
+
+    func confirmAdd(code: Int) {
+        if passcodeConfirmList.count < 6 { passcodeConfirmList.append(code) }
+    }
+
+    func passcodePop() {
+        if !passcodeList.isEmpty {
+            passcodeList.removeLast()
+        }
+    }
+
+    func confirmPop() {
+        if !passcodeConfirmList.isEmpty {
+            passcodeConfirmList.removeLast()
+        }
+    }
+
+    func passcodeRestart() {
+        passcodeList.removeAll()
+    }
+
+    func confirmRestart() {
+        passcodeConfirmList.removeAll()
+    }
+
+    func validate() -> String {
+        if passcodeList.count == 6 && passcodeConfirmList.count == 6 && passcodeList == passcodeConfirmList {
+            var concatenationPasscode = ""
+            for pc in passcodeList {
+                concatenationPasscode += String(pc)
+            }
+            return concatenationPasscode.count == 6 ? concatenationPasscode : ""
+        } else {
+            return ""
+        }
+
+    }
+
 }
