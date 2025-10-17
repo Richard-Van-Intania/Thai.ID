@@ -221,8 +221,21 @@ class PasscodeModel: ObservableObject {
         passcodeConfirmList.removeAll()
     }
 
+    func allRestart() {
+        passcodeList.removeAll()
+        passcodeConfirmList.removeAll()
+    }
+
+    func isPasscodeFull() -> Bool {
+        return passcodeList.count == 6
+    }
+
+    func isConfirmFull() -> Bool {
+        return passcodeConfirmList.count == 6
+    }
+
     func validate() -> String {
-        if passcodeList.count == 6 && passcodeConfirmList.count == 6 && passcodeList == passcodeConfirmList {
+        if isPasscodeFull() && isConfirmFull() && passcodeList == passcodeConfirmList {
             var concatenationPasscode = ""
             for pc in passcodeList {
                 concatenationPasscode += String(pc)
