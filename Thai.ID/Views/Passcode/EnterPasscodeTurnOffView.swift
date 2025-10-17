@@ -1,3 +1,4 @@
+import BCryptSwift
 import SwiftUI
 
 struct EnterPasscodeTurnOffView: View {
@@ -12,6 +13,111 @@ struct EnterPasscodeTurnOffView: View {
     @State private var verifyPasscodeFailedDialog: Bool = false
 
     var body: some View {
-        Text( /*@START_MENU_TOKEN@*/"Hello, World!" /*@END_MENU_TOKEN@*/)
+        VStack {
+            Text("enter_current_pin").frame(maxWidth: .infinity).multilineTextAlignment(.center)
+                .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
+            Spacer().frame(height: 48)
+            HStack(spacing: 24) {
+                ForEach(0...5, id: \.self) { index in
+                    Indicator(filled: index < passcodeList.count)
+                }
+            }.modifier(Shake(animatableData: CGFloat(shakeCount)))
+            Spacer().frame(height: 48)
+            HStack(spacing: 24) {
+                CircleButton(label: 1, passcode: $passcodeList)
+                CircleButton(label: 2, passcode: $passcodeList)
+                CircleButton(label: 3, passcode: $passcodeList)
+            }
+            Spacer().frame(height: 24)
+            HStack(spacing: 24) {
+                CircleButton(label: 4, passcode: $passcodeList)
+                CircleButton(label: 5, passcode: $passcodeList)
+                CircleButton(label: 6, passcode: $passcodeList)
+            }
+            Spacer().frame(height: 24)
+            HStack(spacing: 24) {
+                CircleButton(label: 7, passcode: $passcodeList)
+                CircleButton(label: 8, passcode: $passcodeList)
+                CircleButton(label: 9, passcode: $passcodeList)
+            }
+            Spacer().frame(height: 24)
+            HStack(spacing: 24) {
+                if useBiometric {
+                    Button(action: {
+                        authenticateWithBiometrics(completion: { success, _ in
+                            if success {
+                                isInvalid = false
+                                passcode = ""
+                                path = NavigationPath()
+                            } else {
+                                isInvalid = true
+                                withAnimation(.default) {
+                                    shakeCount += 1
+                                }
+                                passcodeList.removeAll()
+                            }
+                        })
+                    }) {
+                        Image(systemName: "faceid").font(.title2)
+                            .foregroundColor(primary_darkblue)
+                            .frame(width: 88, height: 88).contentShape(Circle())
+                    }.buttonStyle(.plain)
+                } else {
+                    Button(action: {
+                        passcodeList.removeAll()
+                    }) {
+                        Image(systemName: "trash").font(.title2)
+                            .foregroundColor(primary_darkblue)
+                            .frame(width: 88, height: 88).contentShape(Circle())
+                    }.buttonStyle(.plain)
+                }
+                CircleButton(label: 0, passcode: $passcodeList)
+                Button(action: {
+                    if !passcodeList.isEmpty {
+                        passcodeList.removeLast()
+                    }
+                }) {
+                    Image(systemName: "delete.left").font(.title2)
+                        .foregroundColor(primary_darkblue)
+                        .frame(width: 88, height: 88).contentShape(Circle())
+                }.buttonStyle(.plain)
+            }
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { _, _ in
+            if passcodeList.count == 6 {
+                var concatenationPasscode = ""
+                for pc in passcodeList {
+                    concatenationPasscode += String(pc)
+                }
+                do {
+                    let isValid = try BCryptSwiftModern.verifyPassword(concatenationPasscode, matchesHash: passcode)
+                    if isValid {
+                        isInvalid = false
+                        passcode = ""
+                        path = NavigationPath()
+                    } else {
+                        isInvalid = true
+                        withAnimation(.default) {
+                            shakeCount += 1
+                        }
+                        passcodeList.removeAll()
+                    }
+                } catch {
+                    isInvalid = true
+                    withAnimation(.default) {
+                        shakeCount += 1
+                    }
+                    passcodeList.removeAll()
+                    verifyPasscodeFailedDialog = true
+                }
+            }
+        }.alert(
+            "wrong",
+            isPresented: $verifyPasscodeFailedDialog,
+            actions: {
+                Button("ok", role: .none) {}
+            },
+        ).onDisappear {
+            passcodeList.removeAll()
+        }
     }
 }
