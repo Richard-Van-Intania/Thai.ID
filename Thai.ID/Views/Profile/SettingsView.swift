@@ -8,6 +8,7 @@ struct SettingsView: View {
 
     var body: some View {
         VStack {
+            Spacer().frame(height: 24)
             HStack {
                 Text("enable_pin")
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
@@ -25,6 +26,5 @@ struct SettingsView: View {
         }
     }
 }
-
 
 // here
