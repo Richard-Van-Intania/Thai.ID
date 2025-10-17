@@ -2,6 +2,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
+    @EnvironmentObject var settings: AppSettings
 
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
@@ -13,6 +14,7 @@ struct MainView: View {
     @AppStorage("historyViewLayout") private var historyViewLayout: ViewLayout = .list
     @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+    @AppStorage("usePasscode") private var usePasscode: Bool = false
 
     @State private var selectedTab: Int = 0
 
@@ -105,11 +107,11 @@ struct MainView: View {
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
         }.onChange(of: scenePhase) { _, newPhase in
             if newPhase == .active, !isLocalAuth {
-                if passcode.isEmpty, !isAcceptedAgreements, !passcodeAsked {
+                if !usePasscode, !isAcceptedAgreements, !passcodeAsked {
                     homePath.append(HomeRoute.welcomeView)
-                } else if passcode.isEmpty, isAcceptedAgreements, !passcodeAsked {
+                } else if !usePasscode, isAcceptedAgreements, !passcodeAsked {
                     homePath.append(HomeRoute.createPasscodeView)
-                } else if !passcode.isEmpty, isAcceptedAgreements, passcodeAsked {
+                } else if usePasscode, isAcceptedAgreements, passcodeAsked {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }

@@ -1,10 +1,19 @@
+import Combine
 import SwiftUI
 
 @main
 struct Thai_IDApp: App {
+    @StateObject private var settings = AppSettings()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(settings)
         }
     }
+}
+
+class AppSettings: ObservableObject {
+    @Published var isLocalAuth: Bool = false
+    @Published var passcodeList: [Int] = []
+    @Published var passcodeConfirmList: [Int] = []
 }
