@@ -10,6 +10,7 @@ enum HomeRoute: Hashable {
     case authenticationSuccessView
     case profileDetailsView
     case profileEditView
+
 }
 
 enum HistoryRoute: Hashable {
@@ -20,10 +21,13 @@ enum ProfileRoute: Hashable {
     case profileDetailsView
     case profileEditView
     case settingsView
+    case enterPasscodeTurnOffView
+
+    //
     case localizationSettingsView
     case policyAndSafetyView
     case termsView
     case supportView
 }
 
-// authenticationSuccessView  case supportView
+// authenticationSuccessView  case enterPasscodeTurnOffView

@@ -22,7 +22,7 @@ struct EnterPasscodeLoginView: View {
                 ForEach(0...5, id: \.self) { index in
                     Indicator(filled: index < passcodeList.count)
                 }
-            }
+            }.modifier(Shake(animatableData: CGFloat(shakeCount)))
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
                 CircleButton(label: 1, passcode: $passcodeList)
@@ -52,6 +52,9 @@ struct EnterPasscodeLoginView: View {
                                 path = NavigationPath()
                             } else {
                                 isInvalid = true
+                                withAnimation(.default) {
+                                    shakeCount += 1
+                                }
                                 isLocalAuth = false
                                 passcodeList.removeAll()
                             }
@@ -95,11 +98,17 @@ struct EnterPasscodeLoginView: View {
                         path = NavigationPath()
                     } else {
                         isInvalid = true
+                        withAnimation(.default) {
+                            shakeCount += 1
+                        }
                         isLocalAuth = false
                         passcodeList.removeAll()
                     }
                 } catch {
                     isInvalid = true
+                    withAnimation(.default) {
+                        shakeCount += 1
+                    }
                     isLocalAuth = false
                     passcodeList.removeAll()
                     verifyPasscodeFailedDialog = true

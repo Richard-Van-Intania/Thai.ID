@@ -15,12 +15,11 @@ struct SettingsView: View {
                 Spacer()
                 Toggle(isOn: $enabledPasscode) {}.onChange(of: enabledPasscode) {
                     if enabledPasscode {
-                        // open and create pass code
+                        // on
+                        path.append(ProfileRoute.enterPasscodeTurnOffView)
                     } else {
-                        // open and off passcode
-                        // open and off passcode
+                        path.append(ProfileRoute.enterPasscodeTurnOffView)
                     }
-                    print(enabledPasscode)
                 }
             }.padding(.vertical)
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).padding(.horizontal).background(white).toolbar {
@@ -33,4 +32,4 @@ struct SettingsView: View {
     }
 }
 
-// here
+// here EnterPasscodeTurnOff

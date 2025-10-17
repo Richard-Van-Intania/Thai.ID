@@ -79,6 +79,8 @@ struct MainView: View {
                             ProfileEditView(path: $profilePath)
                         case .settingsView:
                             SettingsView(path: $profilePath)
+                        case .enterPasscodeTurnOffView:
+                            EnterPasscodeTurnOffView(path: $profilePath, passcodeList: $passcodeList)
                         case .localizationSettingsView:
                             LocalizationSettingsView(path: $profilePath)
                         case .policyAndSafetyView:
@@ -87,6 +89,7 @@ struct MainView: View {
                             TermsView(path: $profilePath)
                         case .supportView:
                             SupportView(path: $profilePath)
+
                         }
                     }
                 }
