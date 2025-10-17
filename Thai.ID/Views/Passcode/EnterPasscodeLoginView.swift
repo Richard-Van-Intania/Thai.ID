@@ -5,8 +5,9 @@ struct EnterPasscodeLoginView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("useBiometric") private var useBiometric: Bool = false
 
+    @EnvironmentObject private var settings: AppSettings
+
     @Binding var path: NavigationPath
-    @Binding var isLocalAuth: Bool
     @Binding var passcodeList: [Int]
 
     @State private var isInvalid = false
@@ -48,14 +49,14 @@ struct EnterPasscodeLoginView: View {
                         authenticateWithBiometrics(completion: { success, _ in
                             if success {
                                 isInvalid = false
-                                isLocalAuth = true
+                                settings.isLocalAuth = true
                                 path = NavigationPath()
                             } else {
                                 isInvalid = true
                                 withAnimation(.default) {
                                     shakeCount += 1
                                 }
-                                isLocalAuth = false
+                                settings.isLocalAuth = false
                                 passcodeList.removeAll()
                             }
                         })
@@ -94,14 +95,14 @@ struct EnterPasscodeLoginView: View {
                     let isValid = try BCryptSwiftModern.verifyPassword(concatenationPasscode, matchesHash: passcode)
                     if isValid {
                         isInvalid = false
-                        isLocalAuth = true
+                        settings.isLocalAuth = true
                         path = NavigationPath()
                     } else {
                         isInvalid = true
                         withAnimation(.default) {
                             shakeCount += 1
                         }
-                        isLocalAuth = false
+                        settings.isLocalAuth = false
                         passcodeList.removeAll()
                     }
                 } catch {
@@ -109,7 +110,7 @@ struct EnterPasscodeLoginView: View {
                     withAnimation(.default) {
                         shakeCount += 1
                     }
-                    isLocalAuth = false
+                    settings.isLocalAuth = false
                     passcodeList.removeAll()
                     verifyPasscodeFailedDialog = true
                 }

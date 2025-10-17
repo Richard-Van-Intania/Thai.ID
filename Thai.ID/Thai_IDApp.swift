@@ -14,6 +14,4 @@ struct Thai_IDApp: App {
 
 class AppSettings: ObservableObject {
     @Published var isLocalAuth: Bool = false
-    @Published var passcodeList: [Int] = []
-    @Published var passcodeConfirmList: [Int] = []
 }

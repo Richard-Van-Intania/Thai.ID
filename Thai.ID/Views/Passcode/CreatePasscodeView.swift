@@ -2,8 +2,8 @@ import SwiftUI
 
 struct CreatePasscodeView: View {
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+    @EnvironmentObject private var settings: AppSettings
     @Binding var path: NavigationPath
-    @Binding var isLocalAuth: Bool
     @Binding var passcodeList: [Int]
 
     var body: some View {
@@ -58,7 +58,7 @@ struct CreatePasscodeView: View {
             Spacer()
             Button(action: {
                 passcodeAsked = true
-                isLocalAuth = true
+                settings.isLocalAuth = true
                 path = NavigationPath()
             }) {
                 Text("skip")

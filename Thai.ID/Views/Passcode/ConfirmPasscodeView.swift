@@ -5,8 +5,9 @@ struct ConfirmPasscodeView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
 
+    @EnvironmentObject private var settings: AppSettings
+
     @Binding var path: NavigationPath
-    @Binding var isLocalAuth: Bool
     @Binding var passcodeList: [Int]
     @Binding var passcodeConfirmList: [Int]
 
@@ -66,7 +67,7 @@ struct ConfirmPasscodeView: View {
             Spacer()
             Button(action: {
                 passcodeAsked = true
-                isLocalAuth = true
+                settings.isLocalAuth = true
                 path = NavigationPath()
             }) {
                 Text("skip")
@@ -78,7 +79,7 @@ struct ConfirmPasscodeView: View {
                 if passcodeConfirmList == passcodeList {
                     isInvalid = false
                     passcodeAsked = true
-                    isLocalAuth = true
+                    settings.isLocalAuth = true
                     var concatenationPasscode = ""
                     for pc in passcodeConfirmList {
                         concatenationPasscode += String(pc)

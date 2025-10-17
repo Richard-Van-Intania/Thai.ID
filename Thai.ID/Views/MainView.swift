@@ -2,7 +2,7 @@ import SwiftUI
 
 struct MainView: View {
     @Environment(\.scenePhase) private var scenePhase
-    @EnvironmentObject var settings: AppSettings
+    @EnvironmentObject private var settings: AppSettings
 
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
@@ -21,8 +21,6 @@ struct MainView: View {
     @State private var homePath = NavigationPath()
     @State private var historyPath = NavigationPath()
     @State private var profilePath = NavigationPath()
-
-    @State private var isLocalAuth: Bool = false
 
     @State private var passcodeList: [Int] = []
     @State private var passcodeConfirmList: [Int] = []
@@ -44,11 +42,10 @@ struct MainView: View {
                         case .termsView:
                             TermsView(path: $homePath)
                         case .createPasscodeView:
-                            CreatePasscodeView(path: $homePath, isLocalAuth: $isLocalAuth, passcodeList: $passcodeList)
+                            CreatePasscodeView(path: $homePath, passcodeList: $passcodeList)
                         case .confirmPasscodeView:
                             ConfirmPasscodeView(
                                 path: $homePath,
-                                isLocalAuth: $isLocalAuth,
                                 passcodeList: $passcodeList,
                                 passcodeConfirmList: $passcodeConfirmList,
                             )
@@ -57,7 +54,6 @@ struct MainView: View {
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(
                                 path: $homePath,
-                                isLocalAuth: $isLocalAuth,
                                 passcodeList: $passcodeList,
                             )
                         case .profileDetailsView:
@@ -105,16 +101,6 @@ struct MainView: View {
                     TabButton(icon: "person.circle", selectedIcon: "person.circle.fill", label: "profile", tab: 2, selectedTab: $selectedTab)
                 }.ignoresSafeArea().background(.white)
             }.opacity((homePath.isEmpty && historyPath.isEmpty && profilePath.isEmpty) ? 1 : 0)
-        }.onChange(of: scenePhase) { _, newPhase in
-            if newPhase == .active, !isLocalAuth {
-                if !usePasscode, !isAcceptedAgreements, !passcodeAsked {
-                    homePath.append(HomeRoute.welcomeView)
-                } else if !usePasscode, isAcceptedAgreements, !passcodeAsked {
-                    homePath.append(HomeRoute.createPasscodeView)
-                } else if usePasscode, isAcceptedAgreements, passcodeAsked {
-                    homePath.append(HomeRoute.enterPasscodeLoginView)
-                }
-            }
         }.alert(
             "use_biometrics",
             isPresented: $biometricsAskDialog,
@@ -149,6 +135,20 @@ struct MainView: View {
                 Button("ok", role: .none) {}
             },
         ).onAppear {
+            if !settings.isLocalAuth {
+                if !isAcceptedAgreements {
+                    homePath.append(HomeRoute.welcomeView)
+                } else if !passcodeAsked {
+                    homePath.append(HomeRoute.createPasscodeView)
+                } else if usePasscode {
+                    homePath.append(HomeRoute.enterPasscodeLoginView)
+                }
+            }
+        }
+        .onDisappear {
+            // Invalidate the timer when the view disappears
+
+        }.onChange(of: scenePhase) { old, new in
             //
         }
     }
