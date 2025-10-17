@@ -14,6 +14,12 @@ struct SettingsView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
                 Spacer()
                 Toggle(isOn: $enabledPasscode) {}.onChange(of: enabledPasscode) {
+                    if enabledPasscode {
+                        // open and create pass code
+                    } else {
+                        // open and off passcode
+                        // open and off passcode
+                    }
                     print(enabledPasscode)
                 }
             }.padding(.vertical)

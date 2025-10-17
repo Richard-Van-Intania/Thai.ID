@@ -19,7 +19,7 @@ struct EnterPasscodeLoginView: View {
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                ForEach(0 ... 5, id: \.self) { index in
+                ForEach(0...5, id: \.self) { index in
                     Indicator(filled: index < passcodeList.count)
                 }
             }

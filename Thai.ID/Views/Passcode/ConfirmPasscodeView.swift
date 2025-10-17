@@ -21,7 +21,7 @@ struct ConfirmPasscodeView: View {
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                ForEach(0 ... 5, id: \.self) { index in
+                ForEach(0...5, id: \.self) { index in
                     Indicator(filled: index < passcodeConfirmList.count)
                 }
             }.modifier(Shake(animatableData: CGFloat(shakeCount)))
@@ -125,7 +125,7 @@ struct Shake: GeometryEffect {
         ProjectionTransform(
             CGAffineTransform(
                 translationX:
-                amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+                    amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
                 y: 0,
             ),
         )
