@@ -12,7 +12,7 @@ struct EnterPasscodeLoginView: View {
 
     @State private var isInvalid = false
     @State private var shakeCount = 0
-    @State private var verifyPasscodeFailedDialog: Bool = false
+    @State private var errorDialog: Bool = false
 
     var body: some View {
         VStack {
@@ -78,7 +78,7 @@ struct EnterPasscodeLoginView: View {
             }
         }.navigationBarBackButtonHidden(true).alert(
             "wrong",
-            isPresented: $verifyPasscodeFailedDialog,
+            isPresented: $errorDialog,
             actions: {
                 Button("ok", role: .none) {}
             },
@@ -97,7 +97,7 @@ struct EnterPasscodeLoginView: View {
                         }
                     } catch {
                         authFailed()
-                        verifyPasscodeFailedDialog = false
+                        errorDialog = false
                     }
                 } else {
                     authFailed()

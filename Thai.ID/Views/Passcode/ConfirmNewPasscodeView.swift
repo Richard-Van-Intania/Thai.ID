@@ -13,7 +13,7 @@ struct ConfirmNewPasscodeView: View {
 
     @State private var isInvalid = false
     @State private var shakeCount = 0
-    @State private var storePasscodeFailedDialog: Bool = false
+    @State private var errorDialog: Bool = false
 
     var body: some View {
         VStack {
@@ -72,7 +72,7 @@ struct ConfirmNewPasscodeView: View {
             Spacer().frame(height: 16)
         }.alert(
             "wrong",
-            isPresented: $storePasscodeFailedDialog,
+            isPresented: $errorDialog,
             actions: {
                 Button("ok", role: .none) {
                     cancel()
@@ -96,7 +96,7 @@ struct ConfirmNewPasscodeView: View {
                         path.removeLast()
                     } catch {
                         authFailed()
-                        storePasscodeFailedDialog = true
+                        errorDialog = true
                     }
                 } else {
                     authFailed()
