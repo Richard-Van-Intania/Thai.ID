@@ -7,6 +7,7 @@ struct ProfileView: View {
         VStack(
             spacing: 16,
         ) {
+            Spacer().frame(height: 8)
             HStack {
                 Image("thai_id_app_icon").resizable().scaledToFit().frame(height: 64).clipShape(Circle()).overlay {
                     Circle().stroke(secondary_gray, lineWidth: 1)

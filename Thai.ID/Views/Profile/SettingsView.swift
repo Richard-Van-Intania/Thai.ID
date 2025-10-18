@@ -32,16 +32,18 @@ struct SettingsView: View {
                 Spacer()
                 Spacer().frame(width: 72)
             }.padding(.bottom)
-            Divider()
-            Button(action: {}) {
-                HStack {
-                    Text("change_pin")
-                        .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
-                    Spacer()
-                    Image(systemName: "chevron.right").font(.title2).foregroundColor(primary_darkblue)
-                }.padding(.vertical).contentShape(Rectangle())
-            }.buttonStyle(.plain)
-            Divider()
+            if usePasscode {
+                Divider()
+                Button(action: {}) {
+                    HStack {
+                        Text("change_pin")
+                            .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
+                        Spacer()
+                        Image(systemName: "chevron.right").font(.title2).foregroundColor(primary_darkblue)
+                    }.padding(.vertical).contentShape(Rectangle())
+                }.buttonStyle(.plain)
+                Divider()
+            }
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).padding(.horizontal).background(white).toolbar {
             ToolbarItem(placement: .principal) {
                 Text("login_settings").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
