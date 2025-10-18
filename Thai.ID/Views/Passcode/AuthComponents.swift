@@ -1,4 +1,23 @@
+import Combine
+import LocalAuthentication
 import SwiftUI
+
+let reason = "Unlock using Face ID or Touch ID"
+
+func authenticateWithBiometrics(completion: @escaping (Bool, Error?) -> Void) {
+    let context = LAContext()
+    var error: NSError?
+
+    if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+        context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+            DispatchQueue.main.async {
+                completion(success, authenticationError)
+            }
+        }
+    } else {
+        completion(false, error)
+    }
+}
 
 struct Indicator: View {
     let filled: Bool
@@ -28,4 +47,64 @@ struct CircleButton: View {
                 ).contentShape(Circle())
         }.buttonStyle(.plain)
     }
+}
+
+class PasscodeModel: ObservableObject {
+    @Published var passcodeList: [Int] = []
+    @Published var passcodeConfirmList: [Int] = []
+
+    func passcodeAdd(code: Int) {
+        if passcodeList.count < 6 { passcodeList.append(code) }
+    }
+
+    func confirmAdd(code: Int) {
+        if passcodeConfirmList.count < 6 { passcodeConfirmList.append(code) }
+    }
+
+    func passcodePop() {
+        if !passcodeList.isEmpty {
+            passcodeList.removeLast()
+        }
+    }
+
+    func confirmPop() {
+        if !passcodeConfirmList.isEmpty {
+            passcodeConfirmList.removeLast()
+        }
+    }
+
+    func passcodeRestart() {
+        passcodeList.removeAll()
+    }
+
+    func confirmRestart() {
+        passcodeConfirmList.removeAll()
+    }
+
+    func allRestart() {
+        passcodeList.removeAll()
+        passcodeConfirmList.removeAll()
+    }
+
+    func isPasscodeFull() -> Bool {
+        return passcodeList.count == 6
+    }
+
+    func isConfirmFull() -> Bool {
+        return passcodeConfirmList.count == 6
+    }
+
+    func validate() -> String {
+        if isPasscodeFull() && isConfirmFull() && passcodeList == passcodeConfirmList {
+            var concatenationPasscode = ""
+            for pc in passcodeList {
+                concatenationPasscode += String(pc)
+            }
+            return concatenationPasscode.count == 6 ? concatenationPasscode : ""
+        } else {
+            return ""
+        }
+
+    }
+
 }
