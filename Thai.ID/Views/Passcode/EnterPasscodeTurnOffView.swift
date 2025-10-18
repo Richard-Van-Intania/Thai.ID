@@ -4,8 +4,8 @@ import SwiftUI
 struct EnterPasscodeTurnOffView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("useBiometric") private var useBiometric: Bool = false
+    @AppStorage("usePasscode") private var usePasscode: Bool = false
 
-    @EnvironmentObject private var settings: AppSettings
     @ObservedObject var passcodeModel: PasscodeModel
 
     @Binding var path: NavigationPath
@@ -116,9 +116,8 @@ struct EnterPasscodeTurnOffView: View {
 
     func authPassed() {
         isInvalid = false
-        settings.isLocalAuth = true
-        path = NavigationPath()
+        passcode = ""
+        usePasscode = false
+        path.removeLast()
     }
 }
-
-// ghere

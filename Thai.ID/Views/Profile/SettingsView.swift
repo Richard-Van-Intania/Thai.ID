@@ -22,7 +22,7 @@ struct SettingsView: View {
         }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar).onAppear {
             enabledPasscode = !passcode.isEmpty && passcodeAsked
         }.onChange(of: enabledPasscode) { old, new in
-            if new  {
+            if new {
                 // on
                 path.append(ProfileRoute.enterPasscodeTurnOffView)
             } else {
@@ -30,12 +30,9 @@ struct SettingsView: View {
             }
 
             print(enabledPasscode)
-            
+
             if new && !old && passcode.isEmpty {}
-            
-            
+
         }
     }
 }
-
-// here EnterPasscodeTurnOff
