@@ -23,9 +23,6 @@ struct MainView: View {
     @State private var historyPath = NavigationPath()
     @State private var profilePath = NavigationPath()
 
-    @State private var passcodeList: [Int] = []
-    @State private var passcodeConfirmList: [Int] = []
-
     @StateObject private var passcodeModel = PasscodeModel()
 
     @State private var biometricsAskDialog: Bool = false
@@ -159,18 +156,13 @@ struct TabButton: View {
 
     var body: some View {
         Button(
-            action: {
-                selectedTab = tab
-            },
+            action: { selectedTab = tab },
             label: {
                 VStack {
-                    Image(systemName: selectedTab == tab ? selectedIcon : icon)
-                        .foregroundColor(selectedTab == tab ? primary_darkblue : neutral04)
-                        .font(.title)
-                    Text(LocalizedStringKey(label))
-                        .font(.custom(selectedTab == tab ? "FCIconicBold" : "FCIconicRegular", size: 12)).foregroundColor(
-                            selectedTab == tab ? primary_darkblue : neutral04,
-                        ).frame(maxHeight: 8)
+                    Image(systemName: selectedTab == tab ? selectedIcon : icon).foregroundColor(selectedTab == tab ? primary_darkblue : neutral04).font(.title)
+                    Text(LocalizedStringKey(label)).font(.custom(selectedTab == tab ? "FCIconicBold" : "FCIconicRegular", size: 12)).foregroundColor(
+                        selectedTab == tab ? primary_darkblue : neutral04,
+                    ).frame(maxHeight: 8)
                 }.frame(maxWidth: .infinity).padding(.top, 16).contentShape(Rectangle())
             },
         )

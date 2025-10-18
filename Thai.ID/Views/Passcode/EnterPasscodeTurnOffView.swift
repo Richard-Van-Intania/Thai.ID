@@ -82,7 +82,9 @@ struct EnterPasscodeTurnOffView: View {
             actions: {
                 Button("ok", role: .none) {}
             },
-        ).onDisappear {
+        ).onAppear {
+            passcodeModel.allRestart()
+        }.onDisappear {
             passcodeModel.allRestart()
         }.onChange(of: passcodeModel.passcodeList) { oldValue, newValue in
             if oldValue.count == 5 && newValue.count == 6 {
