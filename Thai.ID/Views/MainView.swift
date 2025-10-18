@@ -78,6 +78,10 @@ struct MainView: View {
                             ConfirmNewPasscodeView(passcodeModel: passcodeModel, path: $profilePath)
                         case .enterPasscodeChangeView:
                             EnterPasscodeChangeView(passcodeModel: passcodeModel, path: $profilePath)
+                        case .createPasscodeChangeView:
+                            CreatePasscodeChangeView(passcodeModel: passcodeModel, path: $profilePath)
+                        case .confirmPasscodeChangeView:
+                            ConfirmPasscodeChangeView(passcodeModel: passcodeModel, path: $profilePath)
                         //
                         case .localizationSettingsView:
                             LocalizationSettingsView(path: $profilePath)

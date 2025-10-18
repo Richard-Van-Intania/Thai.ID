@@ -109,6 +109,6 @@ struct EnterPasscodeChangeView: View {
 
     func authPassed() {
         isInvalid = false
-        //
+        path.append(ProfileRoute.createPasscodeChangeView)
     }
 }
