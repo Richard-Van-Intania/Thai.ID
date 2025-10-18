@@ -69,7 +69,7 @@ struct MainView: View {
                         case .profileEditView:
                             ProfileEditView(path: $profilePath)
                         case .settingsView:
-                            SettingsView(path: $profilePath)
+                            SettingsView(path: $profilePath, biometricsAskDialog: $biometricsAskDialog)
                         case .enterPasscodeTurnOffView:
                             EnterPasscodeTurnOffView(passcodeModel: passcodeModel, path: $profilePath)
                         case .createNewPasscodeView:

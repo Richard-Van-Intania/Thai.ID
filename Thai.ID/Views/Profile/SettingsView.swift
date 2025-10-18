@@ -6,6 +6,7 @@ struct SettingsView: View {
     @AppStorage("usePasscode") private var usePasscode: Bool = false
 
     @Binding var path: NavigationPath
+    @Binding var biometricsAskDialog: Bool
 
     var body: some View {
         VStack {
@@ -58,7 +59,14 @@ struct SettingsView: View {
                     path.append(ProfileRoute.enterPasscodeTurnOffView)
                 }
             }
-
+        }.onChange(of: useBiometric) { oldValue, newValue in
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                if newValue && !oldValue {
+                    biometricsAskDialog = true
+                } else if !newValue && oldValue {
+                    useBiometric = false
+                }
+            }
         }
     }
 }
