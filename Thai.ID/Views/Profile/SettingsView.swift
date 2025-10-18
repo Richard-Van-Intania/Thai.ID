@@ -23,8 +23,7 @@ struct SettingsView: View {
             //
         }.onChange(of: usePasscode) { oldValue, newValue in
             if newValue {
-                // on
-                //                path.append(ProfileRoute.enterPasscodeTurnOffView)
+                path.append(ProfileRoute.createNewPasscodeView)
             } else {
                 path.append(ProfileRoute.enterPasscodeTurnOffView)
             }

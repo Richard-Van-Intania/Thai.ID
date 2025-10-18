@@ -16,6 +16,7 @@ struct EnterPasscodeTurnOffView: View {
 
     var body: some View {
         VStack {
+            Spacer()
             Text("enter_current_pin").frame(maxWidth: .infinity).multilineTextAlignment(.center)
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             Spacer().frame(height: 48)

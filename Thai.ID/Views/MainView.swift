@@ -72,6 +72,9 @@ struct MainView: View {
                             SettingsView(path: $profilePath)
                         case .enterPasscodeTurnOffView:
                             EnterPasscodeTurnOffView(passcodeModel: passcodeModel, path: $profilePath)
+                        case .createNewPasscodeView:
+                            CreateNewPasscodeView(passcodeModel: passcodeModel, path: $profilePath)
+                        //
                         case .localizationSettingsView:
                             LocalizationSettingsView(path: $profilePath)
                         case .policyAndSafetyView:
