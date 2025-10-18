@@ -16,6 +16,23 @@ struct SettingsView: View {
                 Spacer()
                 Toggle(isOn: $usePasscode) {}
             }.padding(.vertical)
+            HStack {
+                VStack(alignment: .leading) {
+                    Text("biometrics")
+                        .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
+                    Text("use_biometrics")
+                        .font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
+                }
+                Spacer()
+                Toggle(isOn: $useBiometric) {}
+            }.padding(.vertical)
+            HStack {
+                Text("once_you_enable")
+                    .font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
+                Spacer()
+                Spacer().frame(width: 72)
+            }.padding(.bottom)
+            Divider()
         }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top).padding(.horizontal).background(white).toolbar {
             ToolbarItem(placement: .principal) {
                 Text("login_settings").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
