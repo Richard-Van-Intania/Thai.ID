@@ -24,6 +24,7 @@ enum ProfileRoute: Hashable {
     case enterPasscodeTurnOffView
     case createNewPasscodeView
     case confirmNewPasscodeView
+    case enterPasscodeChangeView
 
     //
     case localizationSettingsView
@@ -32,4 +33,4 @@ enum ProfileRoute: Hashable {
     case supportView
 }
 
-// authenticationSuccessView  case enterPasscodeTurnOffView
+// authenticationSuccessView  case enterPasscodeTurnOffView enterPasscodeChangeView

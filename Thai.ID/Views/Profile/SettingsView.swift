@@ -35,7 +35,9 @@ struct SettingsView: View {
             }.padding(.bottom)
             if usePasscode {
                 Divider()
-                Button(action: {}) {
+                Button(action: {
+                    path.append(ProfileRoute.enterPasscodeChangeView)
+                }) {
                     HStack {
                         Text("change_pin")
                             .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
