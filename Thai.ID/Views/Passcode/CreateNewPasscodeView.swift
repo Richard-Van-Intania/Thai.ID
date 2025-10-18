@@ -1,10 +1,8 @@
 import SwiftUI
 
 struct CreateNewPasscodeView: View {
-    @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
     @AppStorage("usePasscode") private var usePasscode: Bool = false
 
-    @EnvironmentObject private var settings: AppSettings
     @ObservedObject var passcodeModel: PasscodeModel
 
     @Binding var path: NavigationPath
