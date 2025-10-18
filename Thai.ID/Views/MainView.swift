@@ -44,6 +44,7 @@ struct MainView: View {
                             OnboardingView(path: $homePath)
                         case .termsView:
                             TermsView(path: $homePath)
+                        // pass
                         case .createPasscodeView:
                             CreatePasscodeView(path: $homePath, passcodeList: $passcodeList)
                         case .confirmPasscodeView:
@@ -188,4 +189,3 @@ struct TabButton: View {
 #Preview {
     MainView().environment(\.locale, Locale(identifier: "th"))
 }
-
