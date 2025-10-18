@@ -3,7 +3,10 @@ import SwiftUI
 
 struct EnterPasscodeChangeView: View {
     @AppStorage("passcode") private var passcode: String = ""
+    @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+    @AppStorage("usePasscode") private var usePasscode: Bool = false
 
+    @EnvironmentObject private var settings: AppSettings
     @ObservedObject var passcodeModel: PasscodeModel
 
     @Binding var path: NavigationPath
@@ -109,6 +112,9 @@ struct EnterPasscodeChangeView: View {
 
     func authPassed() {
         isInvalid = false
+        passcodeAsked = true
+        usePasscode = true
+        settings.isLocalAuth = true
         path.append(ProfileRoute.createPasscodeChangeView)
     }
 }
