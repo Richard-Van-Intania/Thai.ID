@@ -4,12 +4,12 @@ import SwiftUI
 struct ConfirmPasscodeView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+    @AppStorage("usePasscode") private var usePasscode: Bool = false
 
     @EnvironmentObject private var settings: AppSettings
+    @ObservedObject var passcodeModel: PasscodeModel
 
     @Binding var path: NavigationPath
-    @Binding var passcodeList: [Int]
-    @Binding var passcodeConfirmList: [Int]
 
     @State private var isInvalid = false
     @State private var shakeCount = 0
@@ -23,41 +23,39 @@ struct ConfirmPasscodeView: View {
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
                 ForEach(0...5, id: \.self) { index in
-                    Indicator(filled: index < passcodeConfirmList.count)
+                    Indicator(filled: index < passcodeModel.passcodeConfirmList.count)
                 }
             }.modifier(Shake(animatableData: CGFloat(shakeCount)))
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                CircleButton(label: 1, passcode: $passcodeConfirmList)
-                CircleButton(label: 2, passcode: $passcodeConfirmList)
-                CircleButton(label: 3, passcode: $passcodeConfirmList)
+                CircleButton(label: 1, onButtonTap: { passcodeModel.confirmAdd(code: 1) })
+                CircleButton(label: 2, onButtonTap: { passcodeModel.confirmAdd(code: 2) })
+                CircleButton(label: 3, onButtonTap: { passcodeModel.confirmAdd(code: 3) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 4, passcode: $passcodeConfirmList)
-                CircleButton(label: 5, passcode: $passcodeConfirmList)
-                CircleButton(label: 6, passcode: $passcodeConfirmList)
+                CircleButton(label: 4, onButtonTap: { passcodeModel.confirmAdd(code: 4) })
+                CircleButton(label: 5, onButtonTap: { passcodeModel.confirmAdd(code: 5) })
+                CircleButton(label: 6, onButtonTap: { passcodeModel.confirmAdd(code: 6) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 7, passcode: $passcodeConfirmList)
-                CircleButton(label: 8, passcode: $passcodeConfirmList)
-                CircleButton(label: 9, passcode: $passcodeConfirmList)
+                CircleButton(label: 7, onButtonTap: { passcodeModel.confirmAdd(code: 7) })
+                CircleButton(label: 8, onButtonTap: { passcodeModel.confirmAdd(code: 8) })
+                CircleButton(label: 9, onButtonTap: { passcodeModel.confirmAdd(code: 9) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
                 Button(action: {
-                    passcodeConfirmList.removeAll()
+                    passcodeModel.confirmRestart()
                 }) {
                     Image(systemName: "trash").font(.title2)
                         .foregroundColor(primary_darkblue)
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)
-                CircleButton(label: 0, passcode: $passcodeConfirmList)
+                CircleButton(label: 0, onButtonTap: { passcodeModel.confirmAdd(code: 0) })
                 Button(action: {
-                    if !passcodeConfirmList.isEmpty {
-                        passcodeConfirmList.removeLast()
-                    }
+                    passcodeModel.confirmPop()
                 }) {
                     Image(systemName: "delete.left").font(.title2)
                         .foregroundColor(primary_darkblue)
@@ -66,69 +64,58 @@ struct ConfirmPasscodeView: View {
             }
             Spacer()
             Button(action: {
-                passcodeAsked = true
-                settings.isLocalAuth = true
-                path = NavigationPath()
+                skip()
             }) {
                 Text("skip")
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.onChange(of: passcodeConfirmList) { _, _ in
-            if passcodeConfirmList.count == 6 {
-                if passcodeConfirmList == passcodeList {
-                    isInvalid = false
-                    passcodeAsked = true
-                    settings.isLocalAuth = true
-                    var concatenationPasscode = ""
-                    for pc in passcodeConfirmList {
-                        concatenationPasscode += String(pc)
-                    }
-                    do {
-                        let generatedSalt: String = try BCryptSwiftModern.generateSalt()
-                        let hashedPasscode: String = try BCryptSwiftModern.hashPassword(concatenationPasscode, withSalt: generatedSalt)
-                        passcode = hashedPasscode
-                        path.append(HomeRoute.authenticationSuccessView)
-                    } catch {
-                        passcodeAsked = false
-                        passcode = ""
-                        storePasscodeFailedDialog = true
-                    }
-                } else {
-                    passcodeConfirmList.removeAll()
-                    isInvalid = true
-                    withAnimation(.default) {
-                        shakeCount += 1
-                    }
-                }
-            }
         }.alert(
             "wrong",
             isPresented: $storePasscodeFailedDialog,
             actions: {
                 Button("ok", role: .none) {
-                    path = NavigationPath()
+                    skip()
                 }
             },
         ).onDisappear {
-            passcodeList.removeAll()
-            passcodeConfirmList.removeAll()
+            passcodeModel.allRestart()
+        }.onChange(of: passcodeModel.passcodeConfirmList) { oldValue, newValue in
+            if oldValue.count == 5 && newValue.count == 6 {
+                let concatenationPasscode = passcodeModel.validate()
+                if !concatenationPasscode.isEmpty {
+                    isInvalid = false
+                    do {
+                        let generatedSalt: String = try BCryptSwiftModern.generateSalt()
+                        let hashedPasscode: String = try BCryptSwiftModern.hashPassword(concatenationPasscode, withSalt: generatedSalt)
+                        passcode = hashedPasscode
+                        passcodeAsked = true
+                        usePasscode = true
+                        settings.isLocalAuth = true
+                        path.append(HomeRoute.authenticationSuccessView)
+                    } catch {
+                        authFailed()
+                        storePasscodeFailedDialog = true
+                    }
+                } else {
+                    authFailed()
+                }
+            }
         }
     }
-}
 
-struct Shake: GeometryEffect {
-    var amount: CGFloat = 10
-    var shakesPerUnit = 3
-    var animatableData: CGFloat
+    func authFailed() {
+        isInvalid = true
+        withAnimation(.default) {
+            shakeCount += 1
+        }
+        passcodeModel.confirmRestart()
+    }
 
-    func effectValue(size _: CGSize) -> ProjectionTransform {
-        ProjectionTransform(
-            CGAffineTransform(
-                translationX:
-                    amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
-                y: 0,
-            ),
-        )
+    func skip() {
+        passcodeAsked = true
+        usePasscode = false
+        settings.isLocalAuth = true
+        path = NavigationPath()
     }
 }

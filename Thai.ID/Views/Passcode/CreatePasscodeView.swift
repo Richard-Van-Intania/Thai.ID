@@ -2,9 +2,12 @@ import SwiftUI
 
 struct CreatePasscodeView: View {
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
+    @AppStorage("usePasscode") private var usePasscode: Bool = false
+
     @EnvironmentObject private var settings: AppSettings
+    @ObservedObject var passcodeModel: PasscodeModel
+
     @Binding var path: NavigationPath
-    @Binding var passcodeList: [Int]
 
     var body: some View {
         VStack {
@@ -14,41 +17,39 @@ struct CreatePasscodeView: View {
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
                 ForEach(0...5, id: \.self) { index in
-                    Indicator(filled: index < passcodeList.count)
+                    Indicator(filled: index < passcodeModel.passcodeList.count)
                 }
             }
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                CircleButton(label: 1, passcode: $passcodeList)
-                CircleButton(label: 2, passcode: $passcodeList)
-                CircleButton(label: 3, passcode: $passcodeList)
+                CircleButton(label: 1, onButtonTap: { passcodeModel.passcodeAdd(code: 1) })
+                CircleButton(label: 2, onButtonTap: { passcodeModel.passcodeAdd(code: 2) })
+                CircleButton(label: 3, onButtonTap: { passcodeModel.passcodeAdd(code: 3) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 4, passcode: $passcodeList)
-                CircleButton(label: 5, passcode: $passcodeList)
-                CircleButton(label: 6, passcode: $passcodeList)
+                CircleButton(label: 4, onButtonTap: { passcodeModel.passcodeAdd(code: 4) })
+                CircleButton(label: 5, onButtonTap: { passcodeModel.passcodeAdd(code: 5) })
+                CircleButton(label: 6, onButtonTap: { passcodeModel.passcodeAdd(code: 6) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 7, passcode: $passcodeList)
-                CircleButton(label: 8, passcode: $passcodeList)
-                CircleButton(label: 9, passcode: $passcodeList)
+                CircleButton(label: 7, onButtonTap: { passcodeModel.passcodeAdd(code: 7) })
+                CircleButton(label: 8, onButtonTap: { passcodeModel.passcodeAdd(code: 8) })
+                CircleButton(label: 9, onButtonTap: { passcodeModel.passcodeAdd(code: 9) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
                 Button(action: {
-                    passcodeList.removeAll()
+                    passcodeModel.passcodeRestart()
                 }) {
                     Image(systemName: "trash").font(.title2)
                         .foregroundColor(primary_darkblue)
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)
-                CircleButton(label: 0, passcode: $passcodeList)
+                CircleButton(label: 0, onButtonTap: { passcodeModel.passcodeAdd(code: 0) })
                 Button(action: {
-                    if !passcodeList.isEmpty {
-                        passcodeList.removeLast()
-                    }
+                    passcodeModel.passcodePop()
                 }) {
                     Image(systemName: "delete.left").font(.title2)
                         .foregroundColor(primary_darkblue)
@@ -57,7 +58,9 @@ struct CreatePasscodeView: View {
             }
             Spacer()
             Button(action: {
+                passcodeModel.allRestart()
                 passcodeAsked = true
+                usePasscode = false
                 settings.isLocalAuth = true
                 path = NavigationPath()
             }) {
@@ -65,8 +68,8 @@ struct CreatePasscodeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { _, _ in
-            if passcodeList.count == 6 {
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeModel.passcodeList) {
+            if passcodeModel.isPasscodeFull() {
                 path.append(HomeRoute.confirmPasscodeView)
             }
         }

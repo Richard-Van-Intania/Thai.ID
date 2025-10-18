@@ -44,22 +44,14 @@ struct MainView: View {
                             OnboardingView(path: $homePath)
                         case .termsView:
                             TermsView(path: $homePath)
-                        // pass
                         case .createPasscodeView:
-                            CreatePasscodeView(path: $homePath, passcodeList: $passcodeList)
+                            CreatePasscodeView(passcodeModel: passcodeModel, path: $homePath)
                         case .confirmPasscodeView:
-                            ConfirmPasscodeView(
-                                path: $homePath,
-                                passcodeList: $passcodeList,
-                                passcodeConfirmList: $passcodeConfirmList,
-                            )
+                            ConfirmPasscodeView(passcodeModel: passcodeModel, path: $homePath)
                         case .authenticationSuccessView:
                             AuthenticationSuccessView(path: $homePath, biometricsAskDialog: $biometricsAskDialog)
                         case .enterPasscodeLoginView:
-                            EnterPasscodeLoginView(
-                                path: $homePath,
-                                passcodeList: $passcodeList,
-                            )
+                            EnterPasscodeLoginView(passcodeModel: passcodeModel, path: $homePath)
                         case .profileDetailsView:
                             ProfileDetailsView(path: $homePath)
                         case .profileEditView:
@@ -82,7 +74,7 @@ struct MainView: View {
                         case .settingsView:
                             SettingsView(path: $profilePath)
                         case .enterPasscodeTurnOffView:
-                            EnterPasscodeTurnOffView(path: $profilePath, passcodeList: $passcodeList)
+                            EnterPasscodeTurnOffView(passcodeModel: passcodeModel, path: $profilePath)
                         case .localizationSettingsView:
                             LocalizationSettingsView(path: $profilePath)
                         case .policyAndSafetyView:
@@ -152,7 +144,7 @@ struct MainView: View {
         .onDisappear {
             // Invalidate the timer when the view disappears
 
-        }.onChange(of: scenePhase) { old, new in
+        }.onChange(of: scenePhase) { oldValue, newValue in
             //
         }
     }

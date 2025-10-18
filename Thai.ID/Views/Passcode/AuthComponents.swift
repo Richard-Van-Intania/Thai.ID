@@ -23,29 +23,36 @@ struct Indicator: View {
     let filled: Bool
 
     var body: some View {
-        Circle()
-            .fill(filled ? primary_darkblue : white)
-            .strokeBorder(primary_darkblue, lineWidth: 1)
-            .frame(width: 16, height: 16)
+        Circle().fill(filled ? primary_darkblue : white).strokeBorder(primary_darkblue, lineWidth: 1).frame(width: 16, height: 16)
     }
 }
 
 struct CircleButton: View {
     let label: Int
-    @Binding var passcode: [Int]
+    let onButtonTap: VoidCallback
 
     var body: some View {
-        Button(action: {
-            if passcode.count < 6 { passcode.append(label) }
-        }) {
-            Text(String(label)).font(.custom("FCIconicBold", size: 28))
-                .foregroundColor(primary_darkblue)
-                .frame(width: 88, height: 88)
-                .background(
-                    Circle()
-                        .stroke(primary_darkblue, lineWidth: 1),
-                ).contentShape(Circle())
+        Button(action: onButtonTap) {
+            Text(String(label)).font(.custom("FCIconicBold", size: 28)).foregroundColor(primary_darkblue).frame(width: 88, height: 88).background(
+                Circle().stroke(primary_darkblue, lineWidth: 1),
+            ).contentShape(Circle())
         }.buttonStyle(.plain)
+    }
+}
+
+struct Shake: GeometryEffect {
+    var amount: CGFloat = 10
+    var shakesPerUnit = 3
+    var animatableData: CGFloat
+
+    func effectValue(size _: CGSize) -> ProjectionTransform {
+        ProjectionTransform(
+            CGAffineTransform(
+                translationX:
+                    amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+                y: 0,
+            ),
+        )
     }
 }
 
@@ -96,6 +103,19 @@ class PasscodeModel: ObservableObject {
 
     func validate() -> String {
         if isPasscodeFull() && isConfirmFull() && passcodeList == passcodeConfirmList {
+            var concatenationPasscode = ""
+            for pc in passcodeList {
+                concatenationPasscode += String(pc)
+            }
+            return concatenationPasscode.count == 6 ? concatenationPasscode : ""
+        } else {
+            return ""
+        }
+
+    }
+
+    func passcodeConcatenation() -> String {
+        if isPasscodeFull() {
             var concatenationPasscode = ""
             for pc in passcodeList {
                 concatenationPasscode += String(pc)

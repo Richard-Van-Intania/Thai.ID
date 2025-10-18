@@ -5,8 +5,10 @@ struct EnterPasscodeTurnOffView: View {
     @AppStorage("passcode") private var passcode: String = ""
     @AppStorage("useBiometric") private var useBiometric: Bool = false
 
+    @EnvironmentObject private var settings: AppSettings
+    @ObservedObject var passcodeModel: PasscodeModel
+
     @Binding var path: NavigationPath
-    @Binding var passcodeList: [Int]
 
     @State private var isInvalid = false
     @State private var shakeCount = 0
@@ -19,26 +21,26 @@ struct EnterPasscodeTurnOffView: View {
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
                 ForEach(0...5, id: \.self) { index in
-                    Indicator(filled: index < passcodeList.count)
+                    Indicator(filled: index < passcodeModel.passcodeList.count)
                 }
             }.modifier(Shake(animatableData: CGFloat(shakeCount)))
             Spacer().frame(height: 48)
             HStack(spacing: 24) {
-                CircleButton(label: 1, passcode: $passcodeList)
-                CircleButton(label: 2, passcode: $passcodeList)
-                CircleButton(label: 3, passcode: $passcodeList)
+                CircleButton(label: 1, onButtonTap: { passcodeModel.passcodeAdd(code: 1) })
+                CircleButton(label: 2, onButtonTap: { passcodeModel.passcodeAdd(code: 2) })
+                CircleButton(label: 3, onButtonTap: { passcodeModel.passcodeAdd(code: 3) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 4, passcode: $passcodeList)
-                CircleButton(label: 5, passcode: $passcodeList)
-                CircleButton(label: 6, passcode: $passcodeList)
+                CircleButton(label: 4, onButtonTap: { passcodeModel.passcodeAdd(code: 4) })
+                CircleButton(label: 5, onButtonTap: { passcodeModel.passcodeAdd(code: 5) })
+                CircleButton(label: 6, onButtonTap: { passcodeModel.passcodeAdd(code: 6) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
-                CircleButton(label: 7, passcode: $passcodeList)
-                CircleButton(label: 8, passcode: $passcodeList)
-                CircleButton(label: 9, passcode: $passcodeList)
+                CircleButton(label: 7, onButtonTap: { passcodeModel.passcodeAdd(code: 7) })
+                CircleButton(label: 8, onButtonTap: { passcodeModel.passcodeAdd(code: 8) })
+                CircleButton(label: 9, onButtonTap: { passcodeModel.passcodeAdd(code: 9) })
             }
             Spacer().frame(height: 24)
             HStack(spacing: 24) {
@@ -46,15 +48,9 @@ struct EnterPasscodeTurnOffView: View {
                     Button(action: {
                         authenticateWithBiometrics(completion: { success, _ in
                             if success {
-                                isInvalid = false
-                                passcode = ""
-                                path = NavigationPath()
+                                authPassed()
                             } else {
-                                isInvalid = true
-                                withAnimation(.default) {
-                                    shakeCount += 1
-                                }
-                                passcodeList.removeAll()
+                                authFailed()
                             }
                         })
                     }) {
@@ -64,60 +60,65 @@ struct EnterPasscodeTurnOffView: View {
                     }.buttonStyle(.plain)
                 } else {
                     Button(action: {
-                        passcodeList.removeAll()
+                        passcodeModel.passcodeRestart()
                     }) {
                         Image(systemName: "trash").font(.title2)
                             .foregroundColor(primary_darkblue)
                             .frame(width: 88, height: 88).contentShape(Circle())
                     }.buttonStyle(.plain)
                 }
-                CircleButton(label: 0, passcode: $passcodeList)
+                CircleButton(label: 0, onButtonTap: { passcodeModel.passcodeAdd(code: 0) })
                 Button(action: {
-                    if !passcodeList.isEmpty {
-                        passcodeList.removeLast()
-                    }
+                    passcodeModel.passcodePop()
                 }) {
                     Image(systemName: "delete.left").font(.title2)
                         .foregroundColor(primary_darkblue)
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)
             }
-        }.navigationBarBackButtonHidden(true).onChange(of: passcodeList) { _, _ in
-            if passcodeList.count == 6 {
-                var concatenationPasscode = ""
-                for pc in passcodeList {
-                    concatenationPasscode += String(pc)
-                }
-                do {
-                    let isValid = try BCryptSwiftModern.verifyPassword(concatenationPasscode, matchesHash: passcode)
-                    if isValid {
-                        isInvalid = false
-                        passcode = ""
-                        path = NavigationPath()
-                    } else {
-                        isInvalid = true
-                        withAnimation(.default) {
-                            shakeCount += 1
-                        }
-                        passcodeList.removeAll()
-                    }
-                } catch {
-                    isInvalid = true
-                    withAnimation(.default) {
-                        shakeCount += 1
-                    }
-                    passcodeList.removeAll()
-                    verifyPasscodeFailedDialog = true
-                }
-            }
-        }.alert(
+        }.navigationBarBackButtonHidden(true).alert(
             "wrong",
             isPresented: $verifyPasscodeFailedDialog,
             actions: {
                 Button("ok", role: .none) {}
             },
         ).onDisappear {
-            passcodeList.removeAll()
+            passcodeModel.allRestart()
+        }.onChange(of: passcodeModel.passcodeList) { oldValue, newValue in
+            if oldValue.count == 5 && newValue.count == 6 {
+                let concatenationPasscode = passcodeModel.passcodeConcatenation()
+                if !concatenationPasscode.isEmpty {
+                    do {
+                        let isValid = try BCryptSwiftModern.verifyPassword(concatenationPasscode, matchesHash: passcode)
+                        if isValid {
+                            authPassed()
+                        } else {
+                            authFailed()
+                        }
+                    } catch {
+                        authFailed()
+                        verifyPasscodeFailedDialog = false
+                    }
+                } else {
+                    authFailed()
+                }
+            }
         }
     }
+
+    func authFailed() {
+        isInvalid = true
+        withAnimation(.default) {
+            shakeCount += 1
+        }
+        passcodeModel.passcodeRestart()
+    }
+
+    func authPassed() {
+        isInvalid = false
+        settings.isLocalAuth = true
+        path = NavigationPath()
+    }
 }
+
+// ghere

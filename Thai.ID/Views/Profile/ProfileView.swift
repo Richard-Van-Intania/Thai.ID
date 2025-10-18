@@ -43,7 +43,7 @@ struct ProfileView: View {
 
 struct SettingsMenu: View {
     let label: String
-    let onButtonTap: () -> Void
+    let onButtonTap: VoidCallback
 
     var body: some View {
         Button(action: onButtonTap) {
