@@ -76,6 +76,16 @@ struct EnterPasscodeTurnOffView: View {
                         .frame(width: 88, height: 88).contentShape(Circle())
                 }.buttonStyle(.plain)
             }
+            Spacer()
+            Button(action: {
+                isInvalid = false
+                usePasscode = true
+                path.removeLast()
+            }) {
+                Text("cancel")
+                    .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
+            }.buttonStyle(.plain)
+            Spacer().frame(height: 16)
         }.navigationBarBackButtonHidden(true).alert(
             "wrong",
             isPresented: $verifyPasscodeFailedDialog,
