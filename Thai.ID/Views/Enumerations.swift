@@ -13,9 +13,9 @@ enum ViewLayout: String, CaseIterable, Identifiable {
 }
 
 enum UserLocale: String, CaseIterable, Identifiable {
-    case th
     case en
-
+    case th
+    
     var id: String { rawValue }
 
     var displayName: String {
