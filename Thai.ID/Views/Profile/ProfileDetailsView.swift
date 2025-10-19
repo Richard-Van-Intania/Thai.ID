@@ -3,7 +3,7 @@ import SwiftUI
 struct ProfileDetailsView: View {
     @Environment(\.locale) private var locale
 
-    @AppStorage("idString") private var idString: String = "1490700031833"
+    @AppStorage("idString") private var idString: String = ""
     @AppStorage("thaiPrefix") private var thaiPrefix: String = ""
     @AppStorage("thaiName") private var thaiName: String = ""
     @AppStorage("thaiMiddleName") private var thaiMiddleName: String = ""
@@ -12,7 +12,7 @@ struct ProfileDetailsView: View {
     @AppStorage("engName") private var engName: String = ""
     @AppStorage("engMiddleName") private var engMiddleName: String = ""
     @AppStorage("engSurname") private var engSurname: String = ""
-    @AppStorage("birthDate") private var birthDate: String = "2025-10-19T14:06:23Z"
+    @AppStorage("birthDate") private var birthDate: String = ""
 
     @Binding var path: NavigationPath
 
@@ -66,8 +66,18 @@ struct ProfileDetailsView: View {
                     }
                 }.padding(.vertical)
                 Divider()
-
+                ProfileDetailsHr(label: "personal_info_thai")
+                Divider()
                 ProfileDetailsItem(label: "title", value: $thaiPrefix)
+                ProfileDetailsItem(label: "first_name", value: $thaiName)
+                ProfileDetailsItem(label: "middle_name", value: $thaiMiddleName)
+                ProfileDetailsItem(label: "last_name", value: $thaiSurname)
+                ProfileDetailsHr(label: "personal_info_eng")
+                Divider()
+                ProfileDetailsItem(label: "title", value: $engPrefix)
+                ProfileDetailsItem(label: "first_name", value: $engName)
+                ProfileDetailsItem(label: "middle_name", value: $engMiddleName)
+                ProfileDetailsItem(label: "last_name", value: $engSurname)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity).padding()
         }
@@ -80,7 +90,7 @@ struct ProfileDetailsView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    //                    path.append(ProfileRoute.profileEditView)
+                    path.append(ProfileRoute.profileEditView)
                 }) {
                     Image(systemName: "pencil.line").font(.title2).foregroundColor(neutral05)
                 }.buttonStyle(.plain)
@@ -90,10 +100,6 @@ struct ProfileDetailsView: View {
         .toolbarBackground(white, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
     }
-}
-
-#Preview {
-    ProfileDetailsView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "en"))
 }
 
 struct ProfileDetailsItem: View {
@@ -113,5 +119,15 @@ struct ProfileDetailsItem: View {
             }.padding(.vertical)
             Divider()
         }
+    }
+}
+
+struct ProfileDetailsHr: View {
+    let label: String
+    var body: some View {
+        HStack {
+            Text(LocalizedStringKey(label)).font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_darkblue)
+            Spacer().frame(maxWidth: .infinity, maxHeight: 2).overlay(primary_darkblue).padding(.leading)
+        }.padding(.vertical)
     }
 }
