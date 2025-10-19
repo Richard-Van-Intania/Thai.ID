@@ -92,8 +92,7 @@ struct ConfirmNewPasscodeView: View {
                         passcodeAsked = true
                         usePasscode = true
                         settings.isLocalAuth = true
-                        path.removeLast()
-                        path.removeLast()
+                        path.removeLast(2)
                     } catch {
                         authFailed()
                         errorDialog = true
@@ -117,7 +116,6 @@ struct ConfirmNewPasscodeView: View {
         passcodeAsked = true
         usePasscode = false
         settings.isLocalAuth = true
-        path.removeLast()
-        path.removeLast()
+        path.removeLast(2)
     }
 }

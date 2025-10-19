@@ -92,9 +92,7 @@ struct ConfirmPasscodeChangeView: View {
                         passcodeAsked = true
                         usePasscode = true
                         settings.isLocalAuth = true
-                        path.removeLast()
-                        path.removeLast()
-                        path.removeLast()
+                        path.removeLast(3)
                     } catch {
                         authFailed()
                         errorDialog = true
@@ -115,8 +113,6 @@ struct ConfirmPasscodeChangeView: View {
     }
 
     func cancel() {
-        path.removeLast()
-        path.removeLast()
-        path.removeLast()
+        path.removeLast(3)
     }
 }

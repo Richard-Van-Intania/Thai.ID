@@ -54,8 +54,7 @@ struct CreatePasscodeChangeView: View {
             }
             Spacer()
             Button(action: {
-                path.removeLast()
-                path.removeLast()
+                path.removeLast(2)
             }) {
                 Text("cancel")
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
