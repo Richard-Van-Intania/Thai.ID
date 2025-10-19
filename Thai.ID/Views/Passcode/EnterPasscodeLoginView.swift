@@ -82,8 +82,10 @@ struct EnterPasscodeLoginView: View {
             actions: {
                 Button("ok", role: .none) {}
             },
-        ).onDisappear {
-            passcodeModel.allRestart()
+        ).onAppear {
+            passcodeModel.passcodeRestart()
+        }.onDisappear {
+            passcodeModel.passcodeRestart()
         }.onChange(of: passcodeModel.passcodeList) { oldValue, newValue in
             if oldValue.count == 5 && newValue.count == 6 {
                 let concatenationPasscode = passcodeModel.passcodeConcatenation()

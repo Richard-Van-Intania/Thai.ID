@@ -58,7 +58,7 @@ struct CreatePasscodeView: View {
             }
             Spacer()
             Button(action: {
-                passcodeModel.allRestart()
+                passcodeModel.passcodeRestart()
                 passcodeAsked = true
                 usePasscode = false
                 settings.isLocalAuth = true

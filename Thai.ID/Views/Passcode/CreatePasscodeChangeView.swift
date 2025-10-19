@@ -61,9 +61,7 @@ struct CreatePasscodeChangeView: View {
                     .font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_darkblue)
             }.buttonStyle(.plain)
             Spacer().frame(height: 16)
-        }.navigationBarBackButtonHidden(true).onAppear {
-            passcodeModel.allRestart()
-        }.onChange(of: passcodeModel.passcodeList) {
+        }.navigationBarBackButtonHidden(true).onChange(of: passcodeModel.passcodeList) {
             if passcodeModel.isPasscodeFull() {
                 path.append(ProfileRoute.confirmPasscodeChangeView)
             }

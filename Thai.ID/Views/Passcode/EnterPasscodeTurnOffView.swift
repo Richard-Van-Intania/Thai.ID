@@ -94,9 +94,9 @@ struct EnterPasscodeTurnOffView: View {
                 Button("ok", role: .none) {}
             },
         ).onAppear {
-            passcodeModel.allRestart()
+            passcodeModel.passcodeRestart()
         }.onDisappear {
-            passcodeModel.allRestart()
+            passcodeModel.passcodeRestart()
         }.onChange(of: passcodeModel.passcodeList) { oldValue, newValue in
             if oldValue.count == 5 && newValue.count == 6 {
                 let concatenationPasscode = passcodeModel.passcodeConcatenation()
