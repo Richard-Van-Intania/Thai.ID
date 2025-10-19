@@ -26,7 +26,7 @@ struct SettingsView: View {
                 }
                 Spacer()
                 Toggle(isOn: $useBiometric) {}
-            }.padding(.vertical)
+            }.padding(.top)
             HStack {
                 Text("once_you_enable")
                     .font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
