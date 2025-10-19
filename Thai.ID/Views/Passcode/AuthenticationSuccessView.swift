@@ -12,11 +12,11 @@ struct AuthenticationSuccessView: View {
             Text("set_up_pin_success")
                 .font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
         }.navigationBarBackButtonHidden(true).onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            Task {
+                try? await Task.sleep(for: .seconds(2))
                 path = NavigationPath()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    biometricsAskDialog = true
-                }
+                try? await Task.sleep(for: .seconds(2))
+                biometricsAskDialog = true
             }
         }
     }

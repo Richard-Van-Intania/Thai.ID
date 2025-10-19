@@ -54,7 +54,8 @@ struct SettingsView: View {
         }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar).onChange(
             of: usePasscode
         ) { oldValue, newValue in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Task {
+                try? await Task.sleep(for: .milliseconds(500))
                 if newValue && passcode.isEmpty {
                     path.append(ProfileRoute.createNewPasscodeView)
                 } else if !newValue && !passcode.isEmpty {
@@ -62,7 +63,8 @@ struct SettingsView: View {
                 }
             }
         }.onChange(of: useBiometric) { oldValue, newValue in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            Task {
+                try? await Task.sleep(for: .milliseconds(500))
                 if newValue && !oldValue {
                     biometricsAskDialog = true
                 } else if !newValue && oldValue {
