@@ -12,7 +12,7 @@ struct ProfileDetailsView: View {
     @AppStorage("engName") private var engName: String = ""
     @AppStorage("engMiddleName") private var engMiddleName: String = ""
     @AppStorage("engSurname") private var engSurname: String = ""
-    @AppStorage("birthDate") private var birthDate: String = ""
+    @AppStorage("birthDate") private var birthDate: String = "2025-10-19T14:06:23Z"
 
     @Binding var path: NavigationPath
 
@@ -31,6 +31,18 @@ struct ProfileDetailsView: View {
         return idString
     }
 
+    var date: String {
+        if !birthDate.isEmpty {
+            if let dateFromString = formatter.date(from: birthDate) {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                dateFormatter.locale = locale
+                return dateFormatter.string(from: dateFromString)
+            }
+        }
+        return birthDate
+    }
+
     var body: some View {
         ScrollView {
             VStack {
@@ -47,10 +59,10 @@ struct ProfileDetailsView: View {
                 HStack {
                     Text("date_of_birth").font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
                     Spacer()
-                    if id.isEmpty {
-                        Text("id_number").font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
+                    if date.isEmpty {
+                        Text("date_format").font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
                     } else {
-                        Text(id).font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_darkblue)
+                        Text(date).font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_darkblue)
                     }
                 }.padding(.vertical)
                 Divider()
@@ -81,7 +93,7 @@ struct ProfileDetailsView: View {
 }
 
 #Preview {
-    ProfileDetailsView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "th"))
+    ProfileDetailsView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "en"))
 }
 
 struct ProfileDetailsItem: View {
