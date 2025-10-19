@@ -10,7 +10,13 @@ struct SupportView: View {
     var appVersion: String {
         let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
         let build = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "Unknown"
-        return "\(String(localized: "version", locale: Locale(identifier: locale.rawValue))) \(version) (Build \(build))"
+        if let path = Bundle.main.path(forResource: locale.rawValue, ofType: "lproj"),
+            let bundle = Bundle(path: path)
+        {
+            return "\(String(localized: "version",  bundle: bundle)) \(version) (Build \(build))"
+        } else {
+            return "\(String(localized: "version" )) \(version) (Build \(build))"
+        }
     }
 
     var body: some View {
@@ -25,13 +31,15 @@ struct SupportView: View {
                 .padding(.horizontal)
             Spacer().frame(height: 32)
             Button(action: {
-                let subject = String(localized: "subject", locale: Locale(identifier: locale.rawValue))
-                let body = String(localized: "body", locale: Locale(identifier: locale.rawValue))
-                let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                let urlString = "mailto:\(email)?subject=\(subjectEncoded)&body=\(bodyEncoded)"
-                if let url = URL(string: urlString) {
-                    UIApplication.shared.open(url)
+                if let path = Bundle.main.path(forResource: locale.rawValue, ofType: "lproj"),
+                    let bundle = Bundle(path: path)
+                {
+                    let subject = String(localized: "subject", bundle: bundle)
+                    let body = String(localized: "body", bundle: bundle)
+                    let subjectEncoded = subject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let bodyEncoded = body.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                    let urlString = "mailto:\(email)?subject=\(subjectEncoded)&body=\(bodyEncoded)"
+                    if let url = URL(string: urlString) { UIApplication.shared.open(url) }
                 }
             }) {
                 Text(email)
