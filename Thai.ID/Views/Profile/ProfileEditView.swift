@@ -30,5 +30,5 @@ struct ProfileEditView: View {
 }
 
 #Preview {
-    ProfileEditView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "en"))
+    ProfileEditView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "th"))
 }
