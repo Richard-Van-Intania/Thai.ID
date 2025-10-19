@@ -16,20 +16,16 @@ struct ProfileEditView: View {
 
     var body: some View {
         ScrollView {
-            VStack {
-                HStack {
-                    //
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity).padding()
+            VStack(alignment: .leading) {
+                Text("id_number").font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
+                ProfileDetailsHr(label: "personal_info_thai")
+                ProfileDetailsHr(label: "personal_info_eng")
+            }.frame(maxWidth: .infinity, maxHeight: .infinity).padding()
+        }.background(white).toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("id_card_info").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             }
-            .background(white)
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("id_card_info").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
-                }
-            }
-            .navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar)
-        }
+        }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar)
     }
 }
 
