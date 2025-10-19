@@ -9,7 +9,6 @@ struct MainView: View {
     @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
     @AppStorage("hideInstruction") private var hideInstruction: Bool = false
     @AppStorage("exportCount") private var exportCount: Int = 0
-    @AppStorage("locale") private var locale: UserLocale = .th
     @AppStorage("useBiometric") private var useBiometric: Bool = false
     @AppStorage("homeViewLayout") private var homeViewLayout: ViewLayout = .list
     @AppStorage("historyViewLayout") private var historyViewLayout: ViewLayout = .list
@@ -140,11 +139,11 @@ struct MainView: View {
             },
         ).onAppear {
             if !settings.isLocalAuth {
-                if !isAcceptedAgreements {
+                if !isAcceptedAgreements && passcode.isEmpty && !passcodeAsked && !usePasscode {
                     homePath.append(HomeRoute.welcomeView)
-                } else if !passcodeAsked {
+                } else if isAcceptedAgreements && passcode.isEmpty && !passcodeAsked && !usePasscode {
                     homePath.append(HomeRoute.createPasscodeView)
-                } else if usePasscode {
+                } else if isAcceptedAgreements && !passcode.isEmpty && passcodeAsked && usePasscode {
                     homePath.append(HomeRoute.enterPasscodeLoginView)
                 }
             }

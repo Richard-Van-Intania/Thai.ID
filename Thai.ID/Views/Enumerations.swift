@@ -20,8 +20,8 @@ enum UserLocale: String, CaseIterable, Identifiable {
 
     var displayName: String {
         switch self {
-        case .th: "Thai"
-        case .en: "English"
+        case .th: "ไทย (TH)"
+        case .en: "English (EN)"
         }
     }
 }
