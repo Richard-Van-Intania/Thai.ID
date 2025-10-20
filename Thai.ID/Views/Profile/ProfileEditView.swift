@@ -74,9 +74,25 @@ struct ProfileEditView: View {
                 DatePickerSheetView(selectedDate: $selectedDate, showPicker: $showPicker)
             }
             .onAppear {
-
                 idString = idStringState
-
+                thaiPrefix = thaiPrefixState
+                thaiName = thaiNameState
+                thaiMiddleName = thaiMiddleNameState
+                thaiSurname = thaiSurnameState
+                engPrefix = engPrefixState
+                engName = engNameState
+                engMiddleName = engMiddleNameState
+                engSurname = engSurnameState
+                if birthDate.isEmpty {
+                    birthDateState = birthDate
+                } else {
+                    if let dateFromString = formatter.date(from: birthDate) {
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "dd/MM/yyyy"
+                        dateFormatter.locale = locale
+                        birthDateState = dateFormatter.string(from: dateFromString)
+                    }
+                }
             }
             .onDisappear {
                 // Invalidate the timer when the view disappears
