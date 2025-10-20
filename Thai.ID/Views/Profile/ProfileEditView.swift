@@ -30,6 +30,12 @@ struct ProfileEditView: View {
 
     @Binding var path: NavigationPath
 
+    @State private var method: PaymentMethod = .cash
+
+    @State private var selectedFruit = "Apple"
+
+    let fruits = ["Apple", "Banana", "Orange", "Grape"]
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading) {
@@ -66,6 +72,16 @@ struct ProfileEditView: View {
                 Spacer().frame(height: 16)
                 OutlinedTextField(label: "last_name", value: $engSurnameState)
                 Spacer().frame(height: 16)
+
+                //
+
+                Picker("Payment", selection: $method) {
+                    ForEach(PaymentMethod.allCases) { option in
+                        Text(option.rawValue).tag(option)
+                    }
+                }
+
+                .pickerStyle(.menu)
             }.frame(maxWidth: .infinity, maxHeight: .infinity).padding()
         }.background(white).toolbar {
             ToolbarItem(placement: .principal) {
@@ -159,4 +175,12 @@ struct OutlinedTextField: View {
                 .font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_black)
         }
     }
+}
+
+enum PaymentMethod: String, CaseIterable, Identifiable {
+    case cash = "Cash"
+    case card = "Credit Card"
+    case paypal = "PayPal"
+
+    var id: String { rawValue }
 }
