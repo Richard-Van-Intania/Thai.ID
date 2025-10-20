@@ -1,6 +1,9 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "%lld/13" : {
+
+    },
     "a_credible_solution" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1362,6 +1365,7 @@
       }
     },
     "Hello, World!" : {
+      "extractionState" : "stale",
       "localizations" : {
         "th" : {
           "stringUnit" : {

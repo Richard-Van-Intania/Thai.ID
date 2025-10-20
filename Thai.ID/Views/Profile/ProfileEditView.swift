@@ -34,7 +34,7 @@ struct ProfileEditView: View {
         ScrollView {
             VStack(alignment: .leading) {
                 Text("id_number").font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
-                TextField("id_number", text: $idStringState)
+                TextField("id_number", text: $idStringState).keyboardType(.numberPad)
                     .padding().background(RoundedRectangle(cornerRadius: 4).stroke(neutral04, lineWidth: 1))
                     .frame(maxWidth: .infinity)
                     .font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_black)
@@ -54,16 +54,18 @@ struct ProfileEditView: View {
                     }.buttonStyle(.plain).padding(.horizontal)
                 }
                 ProfileDetailsHr(label: "personal_info_thai")
-                Spacer().frame(height: 100)
-                OutlinedTextField(label: "id_number", value: $idStringState)
-                Spacer().frame(height: 100)
-
-                //
-                OutlinedTextField(label: "id_number", value: $idStringState)
-
-                //
-                ProfileDetailsHr(label: "personal_info_thai")
+                OutlinedTextField(label: "first_name", value: $thaiNameState)
+                Spacer().frame(height: 16)
+                OutlinedTextField(label: "middle_name", value: $thaiMiddleNameState)
+                Spacer().frame(height: 16)
+                OutlinedTextField(label: "last_name", value: $thaiSurnameState)
                 ProfileDetailsHr(label: "personal_info_eng")
+                OutlinedTextField(label: "first_name", value: $engNameState)
+                Spacer().frame(height: 16)
+                OutlinedTextField(label: "middle_name", value: $engMiddleNameState)
+                Spacer().frame(height: 16)
+                OutlinedTextField(label: "last_name", value: $engSurnameState)
+                Spacer().frame(height: 16)
             }.frame(maxWidth: .infinity, maxHeight: .infinity).padding()
         }.background(white).toolbar {
             ToolbarItem(placement: .principal) {
@@ -102,6 +104,12 @@ struct ProfileEditView: View {
                 dateFormatter.dateFormat = "dd/MM/yyyy"
                 dateFormatter.locale = locale
                 birthDateState = dateFormatter.string(from: newValue)
+            }.onChange(of: idStringState) { oldValue, newValue in
+                if newValue.count < 14 {
+                    idStringState = newValue
+                } else {
+                    idStringState = oldValue
+                }
             }
     }
 }
@@ -145,7 +153,7 @@ struct OutlinedTextField: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text(LocalizedStringKey(label)).font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
-            TextField("id_number", text: $value)
+            TextField(LocalizedStringKey(label), text: $value)
                 .padding().background(RoundedRectangle(cornerRadius: 4).stroke(neutral04, lineWidth: 1))
                 .frame(maxWidth: .infinity)
                 .font(.custom("FCIconicRegular", size: 20)).foregroundColor(primary_black)
