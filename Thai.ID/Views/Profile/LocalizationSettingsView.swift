@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct LocalizationSettingsView: View {
-    @AppStorage("locale") private var locale: UserLocale = .en
+    @Environment(\.locale) private var lc
+    @AppStorage("locale") private var locale: UserLocale = .th
     @Binding var path: NavigationPath
 
     var body: some View {
@@ -12,9 +13,7 @@ struct LocalizationSettingsView: View {
                     HStack {
                         Text(UserLocale.en.displayName).font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
                         Spacer()
-                        Image(systemName: locale == UserLocale.en ? "checkmark.circle.fill" : "circle.fill").font(.title2).foregroundColor(
-                            locale == UserLocale.en ? primary_darkblue : blue02
-                        )
+                        Image(systemName: isEn() ? "checkmark.circle.fill" : "circle.fill").font(.title2).foregroundColor(isEn() ? primary_darkblue : blue02)
                     }.padding(.vertical).contentShape(Rectangle())
                 }.buttonStyle(.plain)
                 Divider()
@@ -22,9 +21,7 @@ struct LocalizationSettingsView: View {
                     HStack {
                         Text(UserLocale.th.displayName).font(.custom("FCIconicBold", size: 20)).foregroundColor(primary_black)
                         Spacer()
-                        Image(systemName: locale == UserLocale.en ? "circle.fill" : "checkmark.circle.fill").font(.title2).foregroundColor(
-                            locale == UserLocale.en ? blue02 : primary_darkblue
-                        )
+                        Image(systemName: isEn() ? "circle.fill" : "checkmark.circle.fill").font(.title2).foregroundColor(isEn() ? blue02 : primary_darkblue)
                     }.padding(.vertical).contentShape(Rectangle())
                 }.buttonStyle(.plain)
                 Divider()
@@ -34,5 +31,9 @@ struct LocalizationSettingsView: View {
                 Text("language").font(.custom("FCIconicBold", size: 24)).foregroundColor(primary_black)
             }
         }.navigationBarTitleDisplayMode(.inline).toolbarBackground(white, for: .navigationBar).toolbarBackground(.visible, for: .navigationBar)
+    }
+
+    func isEn() -> Bool {
+        return lc.identifier == UserLocale.en.rawValue
     }
 }
