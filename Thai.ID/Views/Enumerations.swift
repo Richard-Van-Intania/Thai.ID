@@ -13,7 +13,8 @@ enum ViewLayout: String, CaseIterable, Identifiable {
 }
 
 enum UserLocale: String, CaseIterable, Identifiable {
-    case en, th
+    case en
+    case th
 
     var id: String { rawValue }
 
@@ -21,6 +22,30 @@ enum UserLocale: String, CaseIterable, Identifiable {
         switch self {
         case .th: "ไทย (TH)"
         case .en: "English (EN)"
+        }
+    }
+}
+
+enum CardTitle: String, CaseIterable, Identifiable {
+    case mr
+    case miss
+    case mrs
+
+    var id: String { rawValue }
+
+    var displayThai: String {
+        switch self {
+        case .mr: "นาย"
+        case .miss: "นางสาว"
+        case .mrs: "นาง"
+        }
+    }
+
+    var displayEnglish: String {
+        switch self {
+        case .mr: "Mr."
+        case .miss: "Miss"
+        case .mrs: "Mrs."
         }
     }
 }
