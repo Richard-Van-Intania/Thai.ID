@@ -156,10 +156,7 @@ struct ProfileEditView: View {
                         birthDateState = birthDate
                     } else {
                         if let dateFromString = formatter.date(from: birthDate) {
-                            let dateFormatter = DateFormatter()
-                            dateFormatter.dateFormat = "dd/MM/yyyy"
-                            dateFormatter.locale = locale
-                            birthDateState = dateFormatter.string(from: dateFromString)
+                            selectedDate = dateFromString
                         }
                     }
                 }.onChange(of: selectedDate) { oldValue, newValue in
