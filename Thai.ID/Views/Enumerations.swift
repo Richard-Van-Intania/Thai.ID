@@ -49,3 +49,7 @@ enum CardTitle: String, CaseIterable, Identifiable {
         }
     }
 }
+
+enum ScrollAnchor: String {
+    case top
+}
