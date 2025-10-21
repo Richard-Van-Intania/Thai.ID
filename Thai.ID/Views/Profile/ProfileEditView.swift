@@ -1,5 +1,9 @@
 import SwiftUI
 
+let calendar = Calendar.current
+let startDate = calendar.date(byAdding: .year, value: -100, to: Date())!
+let endDate = calendar.date(byAdding: .year, value: -17, to: Date())!
+
 struct ProfileEditView: View {
     @Environment(\.locale) private var locale
 
@@ -25,7 +29,7 @@ struct ProfileEditView: View {
     @State private var engSurnameState: String = ""
     @State private var birthDateState: String = ""
 
-    @State private var selectedDate = Date()
+    @State private var selectedDate = calendar.date(byAdding: .year, value: -20, to: Date())!
     @State private var datePicker = false
 
     @State private var titleThai: CardTitle = .mr
@@ -157,6 +161,8 @@ struct ProfileEditView: View {
                     } else {
                         if let dateFromString = formatter.date(from: birthDate) {
                             selectedDate = dateFromString
+                        } else {
+                            birthDateState = birthDate
                         }
                     }
                 }.onChange(of: selectedDate) { oldValue, newValue in
@@ -189,13 +195,6 @@ struct ProfileEditView: View {
         }
     }
 }
-
-#Preview {
-    ProfileEditView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "th"))
-}
-
-let startDate = Calendar.current.date(byAdding: .year, value: -100, to: Date())!
-let endDate = Calendar.current.date(byAdding: .year, value: -17, to: Date())!
 
 struct DatePickerSheetView: View {
     @Binding var selectedDate: Date

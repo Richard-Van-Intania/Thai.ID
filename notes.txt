@@ -6,3 +6,6 @@ Family: FC Iconic
 
 
 
+#Preview {
+    MainView(path: .constant(NavigationPath())).environment(\.locale, Locale(identifier: "th"))
+}
