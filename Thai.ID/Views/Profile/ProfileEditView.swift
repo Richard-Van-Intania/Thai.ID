@@ -180,6 +180,14 @@ struct ProfileEditView: View {
                 }.onChange(of: titleEnglish) { oldValue, newValue in
                     thaiPrefixState = newValue.displayThai
                     engPrefixState = newValue.displayEnglish
+                }.onChange(of: titlePickerThai) { oldValue, newValue in
+                    if newValue {
+                        thaiPrefixState = titleThai.displayThai
+                    }
+                }.onChange(of: titlePickerEnglish) { oldValue, newValue in
+                    if newValue {
+                        engPrefixState = titleEnglish.displayEnglish
+                    }
                 }
         }
     }
