@@ -14,7 +14,7 @@ struct TermsView: View {
                 if !isAcceptedAgreements {
                     HStack {
                         Button(action: {
-                            path.removeLast(path.count - 1)
+                            path.removeLast(2)
                         }) {
                             Text("decline").font(.custom("FCIconicBold", size: 24))
                                 .foregroundColor(right_gradient)
