@@ -33,8 +33,8 @@ let right_gradient = Color(hex: "#0664C3")
 
 let primary_gradient = LinearGradient(
     gradient: Gradient(colors: [left_gradient, right_gradient]),
-    startPoint: .topLeading,
-    endPoint: .bottomTrailing,
+    startPoint: .leading,
+    endPoint: .trailing,
 )
 
 let primary_black = Color(hex: "#23272E")

@@ -5,9 +5,16 @@ struct HistoryView: View {
 
     var body: some View {
         VStack {
-            Button(String("history")) {
-                //
+            //
+        }.frame(maxWidth: .infinity, maxHeight: .infinity).background(neutral01).toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("history")
+                    .font(.custom("FCIconicBold", size: 24))
+                    .foregroundColor(primary_black)
             }
-        }.background(neutral01)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(white, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
     }
 }
