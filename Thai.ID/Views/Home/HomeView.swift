@@ -14,6 +14,7 @@ struct HomeView: View {
                         )
                 }.ignoresSafeArea()
                 VStack {
+                    Spacer().frame(height: 16)
                     HStack {
                         Image("thai_id_app_icon").resizable().scaledToFit().frame(height: 64).clipShape(Circle())
                         Spacer().frame(width: 16)
