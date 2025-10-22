@@ -15,6 +15,7 @@ struct ProfileDetailsView: View {
     @AppStorage("birthDate") private var birthDate: String = ""
 
     @Binding var path: NavigationPath
+    @Binding var selectedTab: Int
 
     var id: String {
         if !idString.isEmpty {
@@ -90,7 +91,7 @@ struct ProfileDetailsView: View {
             }
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    path.append(ProfileRoute.profileEditView)
+                    if selectedTab == 0 { path.append(HomeRoute.profileEditView) } else if selectedTab == 2 { path.append(ProfileRoute.profileEditView) }
                 }) {
                     Image(systemName: "pencil.line").font(.title2).foregroundColor(neutral05)
                 }.buttonStyle(.plain)

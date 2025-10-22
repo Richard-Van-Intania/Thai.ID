@@ -49,7 +49,7 @@ struct MainView: View {
                         case .enterPasscodeLoginView:
                             EnterPasscodeLoginView(passcodeModel: passcodeModel, path: $homePath)
                         case .profileDetailsView:
-                            ProfileDetailsView(path: $homePath)
+                            ProfileDetailsView(path: $homePath, selectedTab: $selectedTab)
                         case .profileEditView:
                             ProfileEditView(path: $homePath)
                         }
@@ -64,7 +64,7 @@ struct MainView: View {
                     ProfileView(path: $profilePath).navigationDestination(for: ProfileRoute.self) { screen in
                         switch screen {
                         case .profileDetailsView:
-                            ProfileDetailsView(path: $profilePath)
+                            ProfileDetailsView(path: $profilePath, selectedTab: $selectedTab)
                         case .profileEditView:
                             ProfileEditView(path: $profilePath)
                         case .settingsView:
