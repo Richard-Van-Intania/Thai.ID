@@ -49,8 +49,9 @@ struct HomeView: View {
                                 Text("make_a_cert").font(.custom("FCIconicBold", size: 28)).foregroundColor(light_blue09)
                                 Spacer()
                                 Button(action: {
-                                    //                                    path.append(HomeRoute.profileDetailsView)
-
+                                    if !isSelectedNeverShowAgain {
+                                        //
+                                    }
                                 }) {
                                     Image("group_40854").resizable().scaledToFit().frame(height: 64).clipShape(Circle())
                                 }.buttonStyle(.plain)
@@ -71,7 +72,8 @@ struct HomeView: View {
                     Spacer().frame(height: 16)
                     ScrollView {
                         VStack {
-                            Text("make_a_cert").font(.custom("FCIconicBold", size: 28)).foregroundColor(light_blue09)
+                            Image("group_40772").resizable().scaledToFit().frame(height: 96).padding(.vertical)
+                            Text("there_are_no_documents_displayed_on_this_page").font(.custom("FCIconicRegular", size: 20)).foregroundColor(neutral04)
                         }.frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
                 }.frame(maxWidth: .infinity, maxHeight: .infinity)
