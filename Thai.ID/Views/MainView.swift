@@ -6,12 +6,9 @@ struct MainView: View {
     @EnvironmentObject private var settings: AppSettings
 
     @AppStorage("passcode") private var passcode: String = ""
-    @AppStorage("isSelectedNeverShowAgain") private var isSelectedNeverShowAgain: Bool = false
     @AppStorage("hideInstruction") private var hideInstruction: Bool = false
     @AppStorage("exportCount") private var exportCount: Int = 0
     @AppStorage("useBiometric") private var useBiometric: Bool = false
-    @AppStorage("homeViewLayout") private var homeViewLayout: ViewLayout = .list
-    @AppStorage("historyViewLayout") private var historyViewLayout: ViewLayout = .list
     @AppStorage("isAcceptedAgreements") private var isAcceptedAgreements: Bool = false
     @AppStorage("passcodeAsked") private var passcodeAsked: Bool = false
     @AppStorage("usePasscode") private var usePasscode: Bool = false
