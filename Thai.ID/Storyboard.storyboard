@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24128" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i4e-BL-c89">
     <device id="retina6_9" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24063"/>
@@ -9,30 +9,46 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <scene sceneID="TV9-of-DFk">
             <objects>
-                <viewController id="Y6W-OH-hqX" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                <viewController id="i4e-BL-c89" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ilV-E3-uDc">
                         <rect key="frame" x="0.0" y="0.0" width="440" height="956"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="splashlogo" translatesAutoresizingMaskIntoConstraints="NO" id="GUy-os-p0B">
-                                <rect key="frame" x="0.0" y="0.89014235241461392" width="440" height="956.00000000000011"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="VrV-Zb-Edc">
+                                <rect key="frame" x="100" y="358" width="240" height="240"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="L33-Ez-uR2"/>
+                                    <constraint firstAttribute="width" constant="240" id="WCr-sO-Tmm"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 40141" translatesAutoresizingMaskIntoConstraints="NO" id="mS2-DH-t9h">
+                                <rect key="frame" x="150" y="798" width="140" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="140" id="43L-H7-7Ag"/>
+                                    <constraint firstAttribute="height" constant="90" id="guc-f0-9UK"/>
+                                </constraints>
                             </imageView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <viewLayoutGuide key="safeArea" id="0nr-wD-f4o"/>
                         <color key="backgroundColor" name="blue01"/>
+                        <constraints>
+                            <constraint firstItem="mS2-DH-t9h" firstAttribute="bottom" secondItem="ilV-E3-uDc" secondAttribute="bottomMargin" id="AcB-we-gLi"/>
+                            <constraint firstItem="VrV-Zb-Edc" firstAttribute="centerX" secondItem="ilV-E3-uDc" secondAttribute="centerX" id="Fhj-Fy-XwY"/>
+                            <constraint firstItem="mS2-DH-t9h" firstAttribute="centerX" secondItem="ilV-E3-uDc" secondAttribute="centerX" id="odF-wL-PHU"/>
+                            <constraint firstItem="VrV-Zb-Edc" firstAttribute="centerY" secondItem="ilV-E3-uDc" secondAttribute="centerY" id="yKl-t0-JGB"/>
+                        </constraints>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9N-7U-D1g" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="140" y="92"/>
+            <point key="canvasLocation" x="-58" y="-158"/>
         </scene>
     </scenes>
     <resources>
-        <image name="splashlogo" width="960" height="960"/>
+        <image name="Group 40141" width="140" height="90"/>
+        <image name="splash" width="240" height="240"/>
         <namedColor name="blue01">
             <color red="0.95300000905990601" green="0.96899998188018799" blue="0.98400002717971802" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
