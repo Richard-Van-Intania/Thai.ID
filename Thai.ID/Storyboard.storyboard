@@ -23,20 +23,20 @@
                                     <constraint firstAttribute="width" constant="240" id="WCr-sO-Tmm"/>
                                 </constraints>
                             </imageView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 40141" translatesAutoresizingMaskIntoConstraints="NO" id="mS2-DH-t9h">
-                                <rect key="frame" x="150" y="798" width="140" height="90"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group 40141" translatesAutoresizingMaskIntoConstraints="NO" id="Ocr-Ks-ann">
+                                <rect key="frame" x="150" y="866" width="140" height="90"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="140" id="43L-H7-7Ag"/>
-                                    <constraint firstAttribute="height" constant="90" id="guc-f0-9UK"/>
+                                    <constraint firstAttribute="height" constant="90" id="4KQ-nc-rbk"/>
+                                    <constraint firstAttribute="width" constant="140" id="mmq-KL-57r"/>
                                 </constraints>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="0nr-wD-f4o"/>
                         <color key="backgroundColor" name="blue01"/>
                         <constraints>
-                            <constraint firstItem="mS2-DH-t9h" firstAttribute="bottom" secondItem="ilV-E3-uDc" secondAttribute="bottomMargin" id="AcB-we-gLi"/>
                             <constraint firstItem="VrV-Zb-Edc" firstAttribute="centerX" secondItem="ilV-E3-uDc" secondAttribute="centerX" id="Fhj-Fy-XwY"/>
-                            <constraint firstItem="mS2-DH-t9h" firstAttribute="centerX" secondItem="ilV-E3-uDc" secondAttribute="centerX" id="odF-wL-PHU"/>
+                            <constraint firstItem="Ocr-Ks-ann" firstAttribute="centerX" secondItem="ilV-E3-uDc" secondAttribute="centerX" id="aX3-Ov-Hqx"/>
+                            <constraint firstAttribute="bottom" secondItem="Ocr-Ks-ann" secondAttribute="bottom" id="ec6-WD-cjj"/>
                             <constraint firstItem="VrV-Zb-Edc" firstAttribute="centerY" secondItem="ilV-E3-uDc" secondAttribute="centerY" id="yKl-t0-JGB"/>
                         </constraints>
                     </view>
